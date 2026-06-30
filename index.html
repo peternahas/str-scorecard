@@ -4,334 +4,615 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Atlantic Canada STR Scorecard</title>
-<!-- STYLES: same as str-dashboard.html ? embed inline for GitHub Pages -->
 <style>
-  /* [Same CSS as str-dashboard.html ? paste the full CSS block here] */
-  /* For brevity in the script, reference an external CSS or embed in full deploy */
-  :root{--navy:#1B2A4A;--gold:#C9A84C;--white:#FFFFFF;--light:#F5F7FA;--grey:#6B7280;--border:#E5E7EB;--green-bg:#D6EED6;--green-fg:#1A6B1A;--yellow-bg:#FFF9CC;--yellow-fg:#7A6000;--red-bg:#FDDEDE;--red-fg:#8B0000;--orange-bg:#FFE8CC;--orange-fg:#7A3B00}
-  *{box-sizing:border-box;margin:0;padding:0}body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--light);color:#1F2937}
-  header{background:var(--navy);padding:28px 32px 20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.3)}
-  header h1{color:var(--white);font-size:1.5rem;font-weight:700}header p{color:var(--gold);font-size:.82rem;margin-top:4px}
-  .stats-row{display:flex;gap:20px;margin-top:14px;flex-wrap:wrap}
-  .stat-chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:5px 14px;color:var(--white);font-size:.78rem}
-  .stat-chip span{color:var(--gold);font-weight:700}
-  .filters{padding:18px 32px;display:flex;gap:10px;flex-wrap:wrap;background:white;border-bottom:1px solid var(--border)}
-  .filter-btn{padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:white;font-size:.82rem;cursor:pointer;font-weight:600;color:var(--grey);transition:all .15s}
-  .filter-btn:hover{border-color:var(--navy);color:var(--navy)}.filter-btn.active{background:var(--navy);color:white;border-color:var(--navy)}
-  .filter-label{font-size:.75rem;color:var(--grey);display:flex;align-items:center;padding:7px 0;margin-right:4px;font-weight:500}
-  main{max-width:1280px;margin:0 auto;padding:28px 32px}
-  .section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;margin-top:28px}
-  .section-header h2{font-size:1rem;font-weight:700;color:var(--navy)}.section-line{flex:1;height:1px;background:var(--border)}
-  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:20px}
-  .card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);border:1px solid var(--border);transition:transform .15s,box-shadow .15s}
-  .card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}.card.hidden{display:none}
-  .card-top{background:var(--navy);padding:16px 18px 14px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-  .card-top-left{flex:1}.card-rank{font-size:.7rem;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
-  .card-name{color:white;font-size:.95rem;font-weight:700;line-height:1.3}.card-loc{color:rgba(255,255,255,.65);font-size:.78rem;margin-top:3px}
-  .score-badge{min-width:60px;height:60px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;border:3px solid rgba(255,255,255,.2)}
-  .score-badge .num{font-size:1.4rem;line-height:1}.score-badge .denom{font-size:.6rem;opacity:.8}
-  .score-buy{background:var(--green-bg);color:var(--green-fg);border-color:var(--green-fg)}
-  .score-view{background:var(--yellow-bg);color:var(--yellow-fg);border-color:var(--yellow-fg)}
-  .score-monitor{background:var(--orange-bg);color:var(--orange-fg);border-color:var(--orange-fg)}
-  .score-pass{background:var(--red-bg);color:var(--red-fg);border-color:var(--red-fg)}
-  .verdict-pill{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.72rem;font-weight:700;margin-top:6px}
-  .verdict-buy{background:var(--green-bg);color:var(--green-fg)}.verdict-view{background:var(--yellow-bg);color:var(--yellow-fg)}
-  .card-body{padding:16px 18px}.card-price{font-size:1.2rem;font-weight:800;color:var(--navy)}
-  .card-price-note{font-size:.73rem;color:var(--grey);margin-left:8px}
-  .card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-  .meta-chip{background:var(--light);border:1px solid var(--border);border-radius:6px;padding:3px 9px;font-size:.73rem;color:var(--grey)}
-  .score-bar{margin-top:14px}.score-bar-label{display:flex;justify-content:space-between;font-size:.72rem;color:var(--grey);margin-bottom:4px}
-  .score-bar-track{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
-  .score-bar-fill{height:100%;border-radius:3px;transition:width .6s ease}
-  .fill-buy{background:linear-gradient(90deg,#43A047,#2E7D32)}.fill-view{background:linear-gradient(90deg,#FDD835,#F9A825)}.fill-pass{background:linear-gradient(90deg,#EF5350,#C62828)}
-  .breakdown{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:4px}
-  .breakdown-item{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--grey)}.breakdown-item .crit{flex:1}
-  .strengths{margin-top:14px}.strengths h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;color:var(--grey);font-weight:700;margin-bottom:6px}
-  .flag-row{display:flex;gap:6px;flex-wrap:wrap}.flag{display:flex;align-items:center;gap:4px;font-size:.72rem;padding:3px 8px;border-radius:5px;font-weight:500}
-  .flag-pos{background:#ECFDF5;color:#065F46}.flag-warn{background:#FFFBEB;color:#92400E}.flag-neg{background:#FEF2F2;color:#991B1B}
-  .card-actions{padding:14px 18px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-  .btn-primary{padding:8px 16px;background:var(--navy);color:white;border-radius:8px;font-size:.8rem;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:background .15s}
-  .btn-primary:hover{background:#2d4a80}
-  footer{text-align:center;padding:32px;color:var(--grey);font-size:.78rem}
-  footer strong{color:var(--navy)}
-  .last-updated{font-size:.72rem;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);border-radius:20px;padding:4px 12px;display:inline-block}
-  @media(max-width:640px){header,.filters,main{padding-left:16px;padding-right:16px}.cards{grid-template-columns:1fr}}
+  :root {
+    --navy: #1B2A4A;
+    --gold: #C9A84C;
+    --white: #FFFFFF;
+    --light: #F5F7FA;
+    --grey: #6B7280;
+    --border: #E5E7EB;
+    --green-bg: #D6EED6;
+    --green-fg: #1A6B1A;
+    --yellow-bg: #FFF9CC;
+    --yellow-fg: #7A6000;
+    --red-bg: #FDDEDE;
+    --red-fg: #8B0000;
+    --orange-bg: #FFE8CC;
+    --orange-fg: #7A3B00;
+    --blue-bg: #CCF2FF;
+    --blue-fg: #003366;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--light); color: #1F2937; }
+
+  /* ── Header ── */
+  header {
+    background: var(--navy);
+    padding: 28px 32px 20px;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  header h1 { color: var(--white); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.3px; }
+  header p { color: var(--gold); font-size: 0.82rem; margin-top: 4px; opacity: 0.9; }
+  .header-meta { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; }
+  .stats-row { display: flex; gap: 20px; margin-top: 14px; flex-wrap: wrap; }
+  .stat-chip { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px; padding: 5px 14px; color: var(--white); font-size: 0.78rem; }
+  .stat-chip span { color: var(--gold); font-weight: 700; }
+
+  /* ── Filters ── */
+  .filters { padding: 18px 32px; display: flex; gap: 10px; flex-wrap: wrap; background: white;
+    border-bottom: 1px solid var(--border); }
+  .filter-btn { padding: 7px 16px; border-radius: 20px; border: 1.5px solid var(--border);
+    background: white; font-size: 0.82rem; cursor: pointer; font-weight: 600; color: var(--grey);
+    transition: all 0.15s; }
+  .filter-btn:hover { border-color: var(--navy); color: var(--navy); }
+  .filter-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
+  .filter-label { font-size: 0.75rem; color: var(--grey); display: flex; align-items: center;
+    padding: 7px 0; margin-right: 4px; font-weight: 500; }
+
+  /* ── Cards grid ── */
+  main { max-width: 1280px; margin: 0 auto; padding: 28px 32px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; margin-top: 28px; }
+  .section-header h2 { font-size: 1rem; font-weight: 700; color: var(--navy); }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 20px; }
+
+  /* ── Property card ── */
+  .card {
+    background: white; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); border: 1px solid var(--border);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+  .card.hidden { display: none; }
+
+  .card-top {
+    background: var(--navy); padding: 16px 18px 14px;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+  }
+  .card-top-left { flex: 1; }
+  .card-rank { font-size: 0.7rem; color: var(--gold); font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 3px; }
+  .card-name { color: white; font-size: 0.95rem; font-weight: 700; line-height: 1.3; }
+  .card-loc { color: rgba(255,255,255,0.65); font-size: 0.78rem; margin-top: 3px; }
+
+  .score-badge {
+    min-width: 60px; height: 60px; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-weight: 800; flex-shrink: 0; border: 3px solid rgba(255,255,255,0.2);
+  }
+  .score-badge .num { font-size: 1.4rem; line-height: 1; }
+  .score-badge .denom { font-size: 0.6rem; opacity: 0.8; }
+  .score-buy   { background: var(--green-bg); color: var(--green-fg); border-color: var(--green-fg); }
+  .score-view  { background: var(--yellow-bg); color: var(--yellow-fg); border-color: var(--yellow-fg); }
+  .score-monitor { background: var(--orange-bg); color: var(--orange-fg); border-color: var(--orange-fg); }
+  .score-pass  { background: var(--red-bg); color: var(--red-fg); border-color: var(--red-fg); }
+
+  .verdict-pill {
+    display: inline-block; padding: 3px 11px; border-radius: 20px;
+    font-size: 0.72rem; font-weight: 700; margin-top: 6px;
+  }
+  .verdict-buy     { background: var(--green-bg); color: var(--green-fg); }
+  .verdict-view    { background: var(--yellow-bg); color: var(--yellow-fg); }
+  .verdict-monitor { background: var(--orange-bg); color: var(--orange-fg); }
+  .verdict-pass    { background: var(--red-bg); color: var(--red-fg); }
+
+  .card-body { padding: 16px 18px; }
+  .card-price { font-size: 1.2rem; font-weight: 800; color: var(--navy); }
+  .card-price-note { font-size: 0.73rem; color: var(--grey); margin-left: 8px; }
+  .card-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .meta-chip { background: var(--light); border: 1px solid var(--border); border-radius: 6px;
+    padding: 3px 9px; font-size: 0.73rem; color: var(--grey); }
+  .meta-chip strong { color: var(--navy); }
+
+  .score-bar { margin-top: 14px; }
+  .score-bar-label { display: flex; justify-content: space-between; font-size: 0.72rem;
+    color: var(--grey); margin-bottom: 4px; }
+  .score-bar-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+  .fill-buy  { background: linear-gradient(90deg, #43A047, #2E7D32); }
+  .fill-view { background: linear-gradient(90deg, #FDD835, #F9A825); }
+  .fill-pass { background: linear-gradient(90deg, #EF5350, #C62828); }
+
+  /* Mini score breakdown */
+  .breakdown { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .breakdown-item { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: var(--grey); }
+  .breakdown-item .crit { flex: 1; }
+  .breakdown-item .dots { display: flex; gap: 2px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); }
+  .dot.filled-high { background: var(--green-fg); }
+  .dot.filled-med  { background: #F9A825; }
+  .dot.filled-low  { background: var(--red-fg); }
+
+  .strengths { margin-top: 14px; }
+  .strengths h4 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--grey); font-weight: 700; margin-bottom: 6px; }
+  .flag-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .flag { display: flex; align-items: center; gap: 4px; font-size: 0.72rem; padding: 3px 8px;
+    border-radius: 5px; font-weight: 500; }
+  .flag-pos  { background: #ECFDF5; color: #065F46; }
+  .flag-warn { background: #FFFBEB; color: #92400E; }
+  .flag-neg  { background: #FEF2F2; color: #991B1B; }
+
+  .card-actions { padding: 14px 18px; border-top: 1px solid var(--border);
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .btn-primary { padding: 8px 16px; background: var(--navy); color: white; border-radius: 8px;
+    font-size: 0.8rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.15s; }
+  .btn-primary:hover { background: #2d4a80; }
+  .btn-secondary { padding: 7px 14px; background: white; color: var(--navy); border: 1.5px solid var(--border);
+    border-radius: 8px; font-size: 0.8rem; font-weight: 600; text-decoration: none; cursor: pointer;
+    transition: all 0.15s; }
+  .btn-secondary:hover { border-color: var(--navy); }
+  .agent-info { margin-left: auto; font-size: 0.73rem; color: var(--grey); text-align: right; line-height: 1.4; }
+  .agent-info strong { color: var(--navy); display: block; }
+
+  /* Pending section */
+  .pending-card {
+    background: white; border-radius: 12px; padding: 16px 18px;
+    border: 2px dashed var(--border); display: flex; align-items: center; gap: 14px;
+    opacity: 0.75;
+  }
+  .pending-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .pending-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--navy); }
+  .pending-card p { font-size: 0.78rem; color: var(--grey); margin-top: 2px; }
+
+  /* Footer */
+  footer { text-align: center; padding: 32px; color: var(--grey); font-size: 0.78rem; }
+  footer strong { color: var(--navy); }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    header, .filters, main { padding-left: 16px; padding-right: 16px; }
+    .cards { grid-template-columns: 1fr; }
+    .breakdown { grid-template-columns: 1fr; }
+  }
+
+  /* Last updated badge */
+  .last-updated { font-size: 0.72rem; background: rgba(201,168,76,0.15); color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.3); border-radius: 20px; padding: 4px 12px;
+    display: inline-block; }
 </style>
 </head>
 <body>
+
 <header>
-  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px">
+  <div class="header-meta">
     <div>
-      <h1>? Atlantic Canada STR Scorecard</h1>
-      <p>Peter &amp; Jennifer Nahas ? Budget: Under $900K ? NS ? NB ? PEI</p>
+      <h1>🏠 Atlantic Canada STR Scorecard</h1>
+      <p>Peter &amp; Jennifer Nahas · Budget: Under $900K · Markets: NS · NB · PEI</p>
     </div>
-    <span class="last-updated">Updated: June 30, 2026</span>
+    <span class="last-updated" id="lastUpdated">Updated: June 30, 2026</span>
   </div>
   <div class="stats-row">
-    <div class="stat-chip"><span>5</span> properties scored</div>
-    <div class="stat-chip"><span>1</span> Strong Buy</div>
-    <div class="stat-chip"><span>4</span> Worth Viewing</div>
+    <div class="stat-chip"><span id="totalCount">5</span> properties scored</div>
+    <div class="stat-chip"><span>2</span> Strong Buy</div>
+    <div class="stat-chip"><span>3</span> Worth Viewing</div>
+    <div class="stat-chip"><span>2</span> open houses Jul 5</div>
   </div>
 </header>
+
 <div class="filters">
   <span class="filter-label">Filter:</span>
-  <button class="filter-btn active" onclick="filter('all',this)">All</button>
-  <button class="filter-btn" onclick="filter('strong-buy',this)">? Strong Buy</button>
-  <button class="filter-btn" onclick="filter('worth-viewing',this)">? Worth Viewing</button>
+  <button class="filter-btn active" onclick="filter('all', this)">All</button>
+  <button class="filter-btn" onclick="filter('strong-buy', this)">🏆 Strong Buy</button>
+  <button class="filter-btn" onclick="filter('worth-viewing', this)">✅ Worth Viewing</button>
   <span class="filter-label" style="margin-left:12px">Province:</span>
-  <button class="filter-btn" onclick="filterProvince('NS',this)">Nova Scotia</button>
-  <button class="filter-btn" onclick="filterProvince('PEI',this)">PEI</button>
-  <button class="filter-btn" onclick="filterProvince('NB',this)">New Brunswick</button>
+  <button class="filter-btn" onclick="filterProvince('NS', this)">Nova Scotia</button>
+  <button class="filter-btn" onclick="filterProvince('PEI', this)">PEI</button>
+  <button class="filter-btn" onclick="filterProvince('NB', this)">New Brunswick</button>
 </div>
+
 <main>
-  
-  <div class="section-header"><h2>? STRONG BUY (75+)</h2><div class="section-line"></div></div>
+
+  <!-- ── STRONG BUY ── -->
+  <div class="section-header">
+    <h2>🏆 STRONG BUY (75+)</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="cards" id="cards-container">
+
+    <!-- Card 1: Martins River -->
+    <div class="card" data-verdict="strong-buy" data-province="NS">
+      <div class="card-top">
+        <div class="card-top-left">
+          <div class="card-rank">Rank #1 · Nova Scotia</div>
+          <div class="card-name">287 East Side Martins River Road</div>
+          <div class="card-loc">Martins River, Lunenburg County · South Shore</div>
+          <span class="verdict-pill verdict-buy">🏆 STRONG BUY</span>
+        </div>
+        <div class="score-badge score-buy">
+          <span class="num">82</span>
+          <span class="denom">/100</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <span class="card-price">$869,000</span>
+          <span class="card-price-note">▼ from $995,000 · 128 days on market</span>
+        </div>
+        <div class="card-meta">
+          <div class="meta-chip">3 bed + loft</div>
+          <div class="meta-chip">3 bath</div>
+          <div class="meta-chip">2,600 sqft</div>
+          <div class="meta-chip">🛥️ Private dock + mooring</div>
+          <div class="meta-chip">Ocean views</div>
+          <div class="meta-chip">Built 2003</div>
+        </div>
+        <div class="score-bar">
+          <div class="score-bar-label"><span>Score</span><span>82/100</span></div>
+          <div class="score-bar-track"><div class="score-bar-fill fill-buy" style="width:82%"></div></div>
+        </div>
+        <div class="breakdown">
+          <div class="breakdown-item"><span class="crit">Waterfront ×2</span><span style="font-weight:700;color:#2E7D32">16/20</span></div>
+          <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700;color:#2E7D32">9/10</span></div>
+          <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700;color:#2E7D32">9/10</span></div>
+          <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700;color:#2E7D32">9/10</span></div>
+          <div class="breakdown-item"><span class="crit">All-Season</span><span style="font-weight:700;color:#2E7D32">9/10</span></div>
+          <div class="breakdown-item"><span class="crit">Guest Features</span><span style="font-weight:700;color:#2E7D32">9/10</span></div>
+        </div>
+        <div class="strengths" style="margin-top:12px">
+          <h4>Key Flags</h4>
+          <div class="flag-row">
+            <span class="flag flag-pos">✅ Chester/Mahone Bay — NS #1 STR zone</span>
+            <span class="flag flag-pos">✅ Dock + registered mooring included</span>
+            <span class="flag flag-pos">✅ $126K price cut — negotiate further</span>
+            <span class="flag flag-warn">⚠️ Confirm both parcels in sale</span>
+            <span class="flag flag-warn">⚠️ Baseboard heat only</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a href="https://www.realtor.ca/real-estate/29385743/287-east-side-martins-river-road-martins-river" target="_blank" class="btn-primary">View Listing</a>
+        <button class="btn-secondary" onclick="alert('MLS# 202603188')">MLS# 202603188</button>
+        <div class="agent-info">
+          <strong>Sheila Sinnott</strong>
+          Land &amp; Sea Real Estate<br>
+          902-541-0060
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Oyster Pond -->
+    <div class="card" data-verdict="strong-buy" data-province="NS">
+      <div class="card-top">
+        <div class="card-top-left">
+          <div class="card-rank">Rank #2 · Nova Scotia</div>
+          <div class="card-name">10380 Hwy 7, Oyster Pond</div>
+          <div class="card-loc">Eastern Shore, Halifax County</div>
+          <span class="verdict-pill verdict-buy">🏆 STRONG BUY</span>
+        </div>
+        <div class="score-badge score-buy">
+          <span class="num">80</span>
+          <span class="denom">/100</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <span class="card-price">$889,900</span>
+          <span class="card-price-note">Listed May 21 · Open House Jul 5, 1–3pm</span>
+        </div>
+        <div class="card-meta">
+          <div class="meta-chip">2 bed + 3rd-fl loft</div>
+          <div class="meta-chip">2 bath</div>
+          <div class="meta-chip">2,458 sqft</div>
+          <div class="meta-chip">🌊 311ft ocean frontage</div>
+          <div class="meta-chip">Private beach</div>
+          <div class="meta-chip">Solar panels</div>
+          <div class="meta-chip">In-floor heat</div>
+          <div class="meta-chip">Furnishings incl.</div>
+        </div>
+        <div class="score-bar">
+          <div class="score-bar-label"><span>Score</span><span>80/100</span></div>
+          <div class="score-bar-track"><div class="score-bar-fill fill-buy" style="width:80%"></div></div>
+        </div>
+        <div class="breakdown">
+          <div class="breakdown-item"><span class="crit">Waterfront ×2</span><span style="font-weight:700;color:#2E7D32">18/20</span></div>
+          <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700;color:#2E7D32">9/10</span></div>
+          <div class="breakdown-item"><span class="crit">Guest Features</span><span style="font-weight:700;color:#2E7D32">9/10</span></div>
+          <div class="breakdown-item"><span class="crit">Privacy</span><span style="font-weight:700;color:#2E7D32">8/10</span></div>
+          <div class="breakdown-item"><span class="crit">All-Season</span><span style="font-weight:700;color:#2E7D32">8/10</span></div>
+          <div class="breakdown-item"><span class="crit">Price/Income</span><span style="font-weight:700;color:#F9A825">5/10</span></div>
+        </div>
+        <div class="strengths" style="margin-top:12px">
+          <h4>Key Flags</h4>
+          <div class="flag-row">
+            <span class="flag flag-pos">✅ Best direct ocean frontage in pipeline</span>
+            <span class="flag flag-pos">✅ Turn-key — furnishings included</span>
+            <span class="flag flag-pos">✅ Solar + in-floor heat = low OpEx</span>
+            <span class="flag flag-warn">⚠️ 2 bed ceiling — assess loft as 3rd bed</span>
+            <span class="flag flag-warn">⚠️ $889K for 2 bed — cap rate math tight</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a href="https://www.remaxtruro.ca/property/386-202611658-hwy-7-oyster-pond-10380-oyster-pond-NS-B0J2L0" target="_blank" class="btn-primary">View Listing</a>
+        <a href="https://youriguide.com/10380_nova_scotia_trunk_7_jeddore_oyster_ponds_ns/" target="_blank" class="btn-secondary">3D Tour</a>
+        <div class="agent-info">
+          <strong>Kevin Scott</strong>
+          Royal LePage Atlantic<br>
+          Open House Jul 5
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /strong buy cards -->
+
+  <!-- ── WORTH VIEWING ── -->
+  <div class="section-header" style="margin-top:36px">
+    <h2>✅ WORTH VIEWING (55–74)</h2>
+    <div class="section-line"></div>
+  </div>
   <div class="cards">
-      <div class="card" data-verdict="strong-buy" data-province="NS">
-        <div class="card-top">
-          <div class="card-top-left">
-            <div class="card-rank">Rank #1 ? NS</div>
-            <div class="card-name">287 East Side Martins River Road, Martins River, NS</div>
-            <div class="card-loc">Realtor.ca ? Score updated 2026-06-30</div>
-            <span class="verdict-pill verdict-buy">STRONG BUY</span>
-          </div>
-          <div class="score-badge score-buy">
-            <span class="num">82</span>
-            <span class="denom">/100</span>
+
+    <!-- Card 3: Lake George -->
+    <div class="card" data-verdict="worth-viewing" data-province="NS">
+      <div class="card-top">
+        <div class="card-top-left">
+          <div class="card-rank">Rank #3 · Nova Scotia</div>
+          <div class="card-name">4784 Aylesford Road, Lake George</div>
+          <div class="card-loc">Kings County · Annapolis Valley</div>
+          <span class="verdict-pill verdict-view">✅ WORTH VIEWING</span>
+        </div>
+        <div class="score-badge score-view">
+          <span class="num">74</span>
+          <span class="denom">/100</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <span class="card-price">$599,900</span>
+          <span class="card-price-note">Listed Jun 10 · Open House Jul 5, 2–4pm</span>
+        </div>
+        <div class="card-meta">
+          <div class="meta-chip">2 bed</div>
+          <div class="meta-chip">1 bath</div>
+          <div class="meta-chip">1,872 sqft</div>
+          <div class="meta-chip">⛵ 285ft lake frontage</div>
+          <div class="meta-chip">3.22 acres</div>
+          <div class="meta-chip">Grandfathered boathouse</div>
+          <div class="meta-chip">Dock</div>
+          <div class="meta-chip">Built 1940</div>
+        </div>
+        <div class="score-bar">
+          <div class="score-bar-label"><span>Score</span><span>74/100</span></div>
+          <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:74%"></div></div>
+        </div>
+        <div class="strengths" style="margin-top:12px">
+          <h4>Key Flags</h4>
+          <div class="flag-row">
+            <span class="flag flag-pos">✅ Best $/ft waterfront in pipeline</span>
+            <span class="flag flag-pos">✅ Grandfathered boathouse — irreplaceable</span>
+            <span class="flag flag-pos">✅ 3+ acres + 285ft = best value deal</span>
+            <span class="flag flag-warn">⚠️ 1940 house — budget for renovation</span>
+            <span class="flag flag-warn">⚠️ Verify S1 zoning allows STR</span>
           </div>
         </div>
-        <div class="card-body">
-          <div>
-            <span class="card-price">$869,000</span>
-            <span class="card-price-note">Est. cap rate: 0.104</span>
-          </div>
-          <div class="card-meta">
-            <div class="meta-chip">? Waterfront: 8/10</div>
-            <div class="meta-chip">Est. revenue: $90K/yr</div>
-            <div class="meta-chip">Price/Income: 6/10</div>
-          </div>
-          <div class="score-bar">
-            <div class="score-bar-label"><span>Score</span><span>82/100</span></div>
-            <div class="score-bar-track"><div class="score-bar-fill fill-buy" style="width:82%"></div></div>
-          </div>
-          <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ?2</span><span style="font-weight:700">16/20</span></div>
-            <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">9/10</span></div>
-            <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">9/10</span></div>
-            <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">9/10</span></div>
-          </div>
-          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Mahone Bay sailors paradise with separate dock parcel at a motivated $869K ? best South Shore STR opportunity in years."</p>
-          <div class="strengths" style="margin-top:12px">
-            <h4>Key Flags</h4>
-            <div class="flag-row">
-              <span class="flag flag-pos">? South Shore / Mahone Bay ? NS #1 STR market</span><span class="flag flag-pos">? Separate oceanfront boathouse parcel with dock + registered mooring</span><span class="flag flag-pos">? $126K price reduction ? 128 days on market, motivated seller</span>
-              <span class="flag flag-warn">?? Main house has views, not direct water frontage</span><span class="flag flag-warn">?? 128 days on market ? investigate reason</span><span class="flag flag-warn">?? Baseboard heat only ? operating costs</span>
-            </div>
+      </div>
+      <div class="card-actions">
+        <a href="https://www.remaxtruro.ca/property/386-202613966-4784-aylesford-road-lake-george-NS-B0P1C0" target="_blank" class="btn-primary">View Listing</a>
+        <button class="btn-secondary">MLS# 202613966</button>
+        <div class="agent-info">
+          <strong>Sharon Corcoran</strong>
+          Royal LePage Atlantic<br>
+          Open House Jul 5
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: Cape Bear PEI -->
+    <div class="card" data-verdict="worth-viewing" data-province="PEI">
+      <div class="card-top">
+        <div class="card-top-left">
+          <div class="card-rank">Rank #4 · Prince Edward Island</div>
+          <div class="card-name">1067 Cape Bear Road, Murray Harbour</div>
+          <div class="card-loc">Kings County, PEI · Tidal Shore</div>
+          <span class="verdict-pill verdict-view">✅ WORTH VIEWING</span>
+        </div>
+        <div class="score-badge score-view">
+          <span class="num">68</span>
+          <span class="denom">/100</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <span class="card-price">$365,990</span>
+          <span class="card-price-note">Just listed Jun 30 🆕</span>
+        </div>
+        <div class="card-meta">
+          <div class="meta-chip">3 bed</div>
+          <div class="meta-chip">2 bath</div>
+          <div class="meta-chip">1,167 sqft</div>
+          <div class="meta-chip">🌊 ~600ft tidal shore</div>
+          <div class="meta-chip">27 acres</div>
+          <div class="meta-chip">RV lot + hookup</div>
+          <div class="meta-chip">Built 1910</div>
+        </div>
+        <div class="score-bar">
+          <div class="score-bar-label"><span>Score</span><span>68/100</span></div>
+          <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:68%"></div></div>
+        </div>
+        <div class="strengths" style="margin-top:12px">
+          <h4>Key Flags</h4>
+          <div class="flag-row">
+            <span class="flag flag-pos">✅ 27 acres + 600ft shore at $366K — extraordinary value</span>
+            <span class="flag flag-pos">✅ RV income stream already set up</span>
+            <span class="flag flag-warn">⚠️ 1910 farmhouse — major reno needed</span>
+            <span class="flag flag-warn">⚠️ PEI STR registry required</span>
+            <span class="flag flag-warn">⚠️ Tidal (not sandy beach)</span>
           </div>
         </div>
-        <div class="card-actions">
-          <a href="https://www.realtor.ca/real-estate/29385743/287-east-side-martins-river-road-martins-river" target="_blank" class="btn-primary">View Listing</a>
+      </div>
+      <div class="card-actions">
+        <a href="https://www.realtor.ca/real-estate/29965058/1067-cape-bear-road-murray-harbour" target="_blank" class="btn-primary">View Listing</a>
+        <button class="btn-secondary">MLS# 202615921</button>
+        <div class="agent-info">
+          <strong>Sharon Ogawa</strong>
+          Brad Oliver Realty<br>
+          902-969-1135
         </div>
-      </div></div>
-  
-  <div class="section-header" style="margin-top:36px"><h2>? WORTH VIEWING (55?74)</h2><div class="section-line"></div></div>
+      </div>
+    </div>
+
+    <!-- Card 5: Mineville -->
+    <div class="card" data-verdict="worth-viewing" data-province="NS">
+      <div class="card-top">
+        <div class="card-top-left">
+          <div class="card-rank">Rank #5 · Nova Scotia</div>
+          <div class="card-name">157 &amp; 163 Candy Mountain Road</div>
+          <div class="card-loc">Mineville, Halifax County · Lawrencetown Area</div>
+          <span class="verdict-pill verdict-view">✅ WORTH VIEWING</span>
+        </div>
+        <div class="score-badge score-view">
+          <span class="num">64</span>
+          <span class="denom">/100</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <span class="card-price">$747,500</span>
+          <span class="card-price-note">▼ from $829,900 · 3 price cuts in 6 weeks</span>
+        </div>
+        <div class="card-meta">
+          <div class="meta-chip">2 bed</div>
+          <div class="meta-chip">2 bath</div>
+          <div class="meta-chip">2,366 sqft</div>
+          <div class="meta-chip">🏊 166ft lake frontage</div>
+          <div class="meta-chip">Double lots</div>
+          <div class="meta-chip">2-storey boathouse</div>
+          <div class="meta-chip">Built 1977</div>
+        </div>
+        <div class="score-bar">
+          <div class="score-bar-label"><span>Score</span><span>64/100</span></div>
+          <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:64%"></div></div>
+        </div>
+        <div class="strengths" style="margin-top:12px">
+          <h4>Key Flags</h4>
+          <div class="flag-row">
+            <span class="flag flag-pos">✅ Double lots — severance/dual-use potential</span>
+            <span class="flag flag-pos">✅ 3 cuts = motivated seller</span>
+            <span class="flag flag-warn">⚠️ Mineville not a STR destination</span>
+            <span class="flag flag-warn">⚠️ Investigate reason for 3 price cuts</span>
+            <span class="flag flag-neg">❌ Suburban location limits premium STR</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a href="https://www.remaxtruro.ca/property/386-202611338-157-163-candy-mountain-road-mineville-NS-B2Z1K4" target="_blank" class="btn-primary">View Listing</a>
+        <button class="btn-secondary">MLS# 202611338</button>
+        <div class="agent-info">
+          <strong>Phil Evans</strong>
+          KW Select Realty<br>
+          Open House Jul 5
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /worth viewing cards -->
+
+  <!-- ── PENDING REVIEW ── -->
+  <div class="section-header" style="margin-top:36px">
+    <h2>📋 Pending Review</h2>
+    <div class="section-line"></div>
+  </div>
   <div class="cards">
-      <div class="card" data-verdict="worth-viewing" data-province="PEI">
-        <div class="card-top">
-          <div class="card-top-left">
-            <div class="card-rank">Rank #2 ? PEI</div>
-            <div class="card-name">1067 Cape Bear Road, Murray Harbour, Prince Edward Island C0A1V0</div>
-            <div class="card-loc">Realtor.ca ? Score updated 2026-06-30</div>
-            <span class="verdict-pill verdict-view">WORTH VIEWING</span>
-          </div>
-          <div class="score-badge score-view">
-            <span class="num">64</span>
-            <span class="denom">/100</span>
-          </div>
-        </div>
-        <div class="card-body">
-          <div>
-            <span class="card-price">$365,990</span>
-            <span class="card-price-note">Est. cap rate: 0.087</span>
-          </div>
-          <div class="card-meta">
-            <div class="meta-chip">? Waterfront: 8/10</div>
-            <div class="meta-chip">Est. revenue: $32K/yr</div>
-            <div class="meta-chip">Price/Income: 7/10</div>
-          </div>
-          <div class="score-bar">
-            <div class="score-bar-label"><span>Score</span><span>64/100</span></div>
-            <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:64%"></div></div>
-          </div>
-          <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ?2</span><span style="font-weight:700">16/20</span></div>
-            <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">5/10</span></div>
-            <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">6/10</span></div>
-            <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">6/10</span></div>
-          </div>
-          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Rare waterfront acreage at exceptional value with strong privacy and diversified revenue potential, but limited STR market demand and seasonal occupancy headwinds in quiet village setting demand operator expertise."</p>
-          <div class="strengths" style="margin-top:12px">
-            <h4>Key Flags</h4>
-            <div class="flag-row">
-              <span class="flag flag-pos">? Exceptional waterfront: 600ft shoreline on 27 acres with direct ocean access and RV power infrastructure</span><span class="flag flag-pos">? Outstanding privacy and seclusion ideal for retreats and multi-family bookings</span><span class="flag flag-pos">? Exceptional price-to-asset ratio well under budget with strong bones and rural development potential</span>
-              <span class="flag flag-warn">?? Murray Harbour is a quiet village with limited proven STR demand and no major anchor attractions within drive time</span><span class="flag flag-warn">?? 3-bedroom farmhouse layout and 1910 construction may require significant upgrades for modern STR guest expectations</span><span class="flag flag-warn">?? Regulatory clarity on STR zoning in rural PEI and seasonal occupancy patterns poorly documented</span>
-            </div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://www.realtor.ca/real-estate/29965058/1067-cape-bear-road-murray-harbour" target="_blank" class="btn-primary">View Listing</a>
-        </div>
+    <div class="pending-card">
+      <div class="pending-icon">🇨🇦</div>
+      <div>
+        <h3>NB Custom Boundary — 13 Listings</h3>
+        <p>New Brunswick batch from Jun 29 email · New search with proper geographic boundary · Not yet scored</p>
       </div>
-
-      <div class="card" data-verdict="worth-viewing" data-province="PEI">
-        <div class="card-top">
-          <div class="card-top-left">
-            <div class="card-rank">Rank #3 ? PEI</div>
-            <div class="card-name">10 Chestnut Street, Charlottetown, Prince Edward Island P1A1Z5</div>
-            <div class="card-loc">Realtor.ca ? Score updated 2026-06-30</div>
-            <span class="verdict-pill verdict-view">WORTH VIEWING</span>
-          </div>
-          <div class="score-badge score-view">
-            <span class="num">62</span>
-            <span class="denom">/100</span>
-          </div>
-        </div>
-        <div class="card-body">
-          <div>
-            <span class="card-price">$629,000</span>
-            <span class="card-price-note">Est. cap rate: 0.076</span>
-          </div>
-          <div class="card-meta">
-            <div class="meta-chip">? Waterfront: 3/10</div>
-            <div class="meta-chip">Est. revenue: $48K/yr</div>
-            <div class="meta-chip">Price/Income: 7/10</div>
-          </div>
-          <div class="score-bar">
-            <div class="score-bar-label"><span>Score</span><span>62/100</span></div>
-            <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:62%"></div></div>
-          </div>
-          <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ?2</span><span style="font-weight:700">6/20</span></div>
-            <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">7/10</span></div>
-            <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">5/10</span></div>
-            <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">9/10</span></div>
-          </div>
-          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Urban duplex with solid downtown appeal and dual-income potential, but lacks waterfront access and privacy?pass for waterfront-focused investors."</p>
-          <div class="strengths" style="margin-top:12px">
-            <h4>Key Flags</h4>
-            <div class="flag-row">
-              <span class="flag flag-pos">? Prime downtown Charlottetown location walking distance to waterfront, restaurants, shops, and tourism anchors</span><span class="flag flag-pos">? Dual-unit duplex structure enables 50% occupancy offset model or full STR conversion with strong seasonal demand</span><span class="flag flag-pos">? Well-updated turnkey property with modern finishes and 4BR/4BA total capacity appeals to family groups and events</span>
-              <span class="flag flag-warn">?? No direct waterfront frontage?'short walk' to water fails core selection criterion for premium Atlantic Canada STR yields</span><span class="flag flag-warn">?? Duplex regulatory status may restrict STR zoning permits; municipal bylaws on multi-unit rentals unclear</span><span class="flag flag-warn">?? Limited privacy and seclusion (0.05 acres, downtown lot) reduces appeal for high-margin luxury guests seeking retreat experience</span>
-            </div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://www.realtor.ca/real-estate/29966461/10-chestnut-street-charlottetown" target="_blank" class="btn-primary">View Listing</a>
-        </div>
+    </div>
+    <div class="pending-card">
+      <div class="pending-icon">🏚️</div>
+      <div>
+        <h3>434 Maccormack Road, Sandford NS + 3653 West Bay Rd, St Georges Channel NS</h3>
+        <p>From earlier searches · Need status verification + full scoring</p>
       </div>
+    </div>
+  </div>
 
-      <div class="card" data-verdict="worth-viewing" data-province="PEI">
-        <div class="card-top">
-          <div class="card-top-left">
-            <div class="card-rank">Rank #4 ? PEI</div>
-            <div class="card-name">14 Southport Drive, Stratford, Prince Edward Island C1B 2A6</div>
-            <div class="card-loc">Realtor.ca ? Score updated 2026-06-30</div>
-            <span class="verdict-pill verdict-view">WORTH VIEWING</span>
-          </div>
-          <div class="score-badge score-view">
-            <span class="num">62</span>
-            <span class="denom">/100</span>
-          </div>
-        </div>
-        <div class="card-body">
-          <div>
-            <span class="card-price">$454,900</span>
-            <span class="card-price-note">Est. cap rate: 0.093</span>
-          </div>
-          <div class="card-meta">
-            <div class="meta-chip">? Waterfront: 5/10</div>
-            <div class="meta-chip">Est. revenue: $43K/yr</div>
-            <div class="meta-chip">Price/Income: 7/10</div>
-          </div>
-          <div class="score-bar">
-            <div class="score-bar-label"><span>Score</span><span>62/100</span></div>
-            <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:62%"></div></div>
-          </div>
-          <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ?2</span><span style="font-weight:700">10/20</span></div>
-            <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">6/10</span></div>
-            <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">5/10</span></div>
-            <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">8/10</span></div>
-          </div>
-          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Solid suburban family rental with strong pool/amenities and Charlottetown proximity, but lacks proven waterfront access and year-round demand to justify premium STR positioning."</p>
-          <div class="strengths" style="margin-top:12px">
-            <h4>Key Flags</h4>
-            <div class="flag-row">
-              <span class="flag flag-pos">? Exceptional proximity to downtown Charlottetown (5 min) and waterfront trails?strong tourism anchor</span><span class="flag flag-pos">? Well-maintained 2,000+ sq ft with 3 bed/2 bath + flex rooms provides multi-unit rental flexibility</span><span class="flag flag-pos">? Heated above-ground pool and entertaining deck are high-appeal guest amenities for summer peak season</span>
-              <span class="flag flag-warn">?? No confirmed direct waterfront access (only 'near' trails)?materially limits waterfront premium pricing</span><span class="flag flag-warn">?? PEI STR regulations require owner-occupied or municipal approval; Stratford zoning status unclear</span><span class="flag flag-warn">?? Summer-peak dependent market; limited winter draw without premium all-season positioning (ski, spa, events)</span>
-            </div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://www.realtor.ca/real-estate/29966266/14-southport-drive-stratford" target="_blank" class="btn-primary">View Listing</a>
-        </div>
+  <!-- ── MISSED ── -->
+  <div class="section-header" style="margin-top:36px">
+    <h2>😔 Missed / Gone</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="cards">
+    <div class="pending-card" style="opacity:0.5">
+      <div class="pending-icon">⏱️</div>
+      <div>
+        <h3>80 Kinburn Acres Road, Maders Cove NS — $899,000</h3>
+        <p>South Shore waterfront · Went PENDING June 30 · This is why the automation pipeline matters</p>
       </div>
+    </div>
+    <div class="pending-card" style="opacity:0.5">
+      <div class="pending-icon">❌</div>
+      <div>
+        <h3>5636 East Bay Highway, Ben Eoin NS — ~$685,000</h3>
+        <p>Cape Breton · Listing no longer exists on Realtor.ca</p>
+      </div>
+    </div>
+  </div>
 
-      <div class="card" data-verdict="worth-viewing" data-province="PEI">
-        <div class="card-top">
-          <div class="card-top-left">
-            <div class="card-rank">Rank #5 ? PEI</div>
-            <div class="card-name">190 Harvard Street, Summerside, Prince Edward Island C1N1R6</div>
-            <div class="card-loc">Realtor.ca ? Score updated 2026-06-30</div>
-            <span class="verdict-pill verdict-view">WORTH VIEWING</span>
-          </div>
-          <div class="score-badge score-view">
-            <span class="num">62</span>
-            <span class="denom">/100</span>
-          </div>
-        </div>
-        <div class="card-body">
-          <div>
-            <span class="card-price">$429,900</span>
-            <span class="card-price-note">Est. cap rate: 0.074</span>
-          </div>
-          <div class="card-meta">
-            <div class="meta-chip">? Waterfront: 5/10</div>
-            <div class="meta-chip">Est. revenue: $32K/yr</div>
-            <div class="meta-chip">Price/Income: 7/10</div>
-          </div>
-          <div class="score-bar">
-            <div class="score-bar-label"><span>Score</span><span>62/100</span></div>
-            <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:62%"></div></div>
-          </div>
-          <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ?2</span><span style="font-weight:700">10/20</span></div>
-            <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">6/10</span></div>
-            <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">5/10</span></div>
-            <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">9/10</span></div>
-          </div>
-          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Charming downtown character home with excellent walkability and low entry cost, but lacks direct waterfront access and Summerside's STR demand remains unproven for premium yields."</p>
-          <div class="strengths" style="margin-top:12px">
-            <h4>Key Flags</h4>
-            <div class="flag-row">
-              <span class="flag flag-pos">? Prime downtown Summerside location with walkable access to waterfront boardwalk, restaurants, and cultural venues</span><span class="flag flag-pos">? Excellent infrastructure: year-round paved access, full utilities, low property taxes ($2,094)</span><span class="flag flag-pos">? Affordable entry point ($429,900) well below budget ceiling with modern renovations maintaining character appeal</span>
-              <span class="flag flag-warn">?? No direct waterfront frontage?proximity only, missing double-weighted waterfront revenue multiplier</span><span class="flag flag-warn">?? Limited privacy and seclusion on 0.134 acres in downtown core reduces luxury positioning</span><span class="flag flag-warn">?? Summerside STR market unproven; lacks comparable rental data and seasonal demand verification vs. Charlottetown/Cavendish</span>
-            </div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://www.realtor.ca/real-estate/29964921/190-harvard-street-summerside" target="_blank" class="btn-primary">View Listing</a>
-        </div>
-      </div></div>
 </main>
+
 <footer>
-  <p><strong>Atlantic Canada STR Scorecard</strong> ? Auto-updated via Gmail + Claude API</p>
-  <p style="margin-top:6px">Last updated: June 30, 2026</p>
+  <p><strong>Atlantic Canada STR Scorecard</strong> · Peter &amp; Jennifer Nahas · Private</p>
+  <p style="margin-top:6px">Auto-updated via Google Apps Script + Claude API · Scoring: Waterfront ×2, all criteria 0–10, total /100</p>
+  <p style="margin-top:6px" id="footerDate"></p>
 </footer>
+
 <script>
-  function filter(v,btn){document.querySelectorAll('.filter-btn').forEach(b=>{if(['All','? Strong Buy','? Worth Viewing'].some(t=>b.textContent.includes(t.replace(/?|?/g,'').trim())))b.classList.remove('active')});btn.classList.add('active');document.querySelectorAll('.card[data-verdict]').forEach(c=>{c.classList.toggle('hidden',v!=='all'&&c.dataset.verdict!==v)});}
-  function filterProvince(p,btn){if(btn.classList.contains('active')){btn.classList.remove('active');document.querySelectorAll('.card[data-province]').forEach(c=>c.classList.remove('hidden'));}else{document.querySelectorAll('.filter-btn').forEach(b=>{if(['Nova Scotia','PEI','New Brunswick'].includes(b.textContent))b.classList.remove('active')});btn.classList.add('active');document.querySelectorAll('.card[data-province]').forEach(c=>c.classList.toggle('hidden',c.dataset.province!==p));}}
-  window.addEventListener('load',()=>{document.querySelectorAll('.score-bar-fill').forEach(b=>{const w=b.style.width;b.style.width='0';setTimeout(()=>{b.style.width=w;},100);});});
+  // Set dates
+  document.getElementById('footerDate').textContent = 'Last updated: ' + new Date().toLocaleDateString('en-CA', {year:'numeric',month:'long',day:'numeric'});
+
+  // Filter by verdict
+  function filter(verdict, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      if (b.textContent.includes('All') || b.textContent.includes('Strong') || b.textContent.includes('Worth')) {
+        b.classList.remove('active');
+      }
+    });
+    btn.classList.add('active');
+    document.querySelectorAll('.card[data-verdict]').forEach(card => {
+      if (verdict === 'all') { card.classList.remove('hidden'); }
+      else { card.classList.toggle('hidden', card.dataset.verdict !== verdict); }
+    });
+    updateCount();
+  }
+
+  // Filter by province
+  function filterProvince(province, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      if (['Nova Scotia','PEI','New Brunswick'].includes(b.textContent)) b.classList.remove('active');
+    });
+    if (btn.classList.contains('active')) {
+      btn.classList.remove('active');
+      document.querySelectorAll('.card[data-province]').forEach(c => c.classList.remove('hidden'));
+    } else {
+      btn.classList.add('active');
+      document.querySelectorAll('.card[data-province]').forEach(card => {
+        card.classList.toggle('hidden', card.dataset.province !== province);
+      });
+    }
+    updateCount();
+  }
+
+  function updateCount() {
+    const visible = document.querySelectorAll('.card[data-verdict]:not(.hidden)').length;
+    document.getElementById('totalCount').textContent = visible;
+  }
+
+  // Animate score bars on load
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.score-bar-fill').forEach(bar => {
+      const w = bar.style.width;
+      bar.style.width = '0';
+      setTimeout(() => { bar.style.width = w; }, 100);
+    });
+  });
 </script>
 </body>
 </html>
