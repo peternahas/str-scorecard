@@ -3,15 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0D1B2A">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="STR Scorecard">
+<link id="pwa-manifest" rel="manifest" href="">
+<link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="">
 <title>Atlantic Canada STR Scorecard</title>
 <style>
   :root {
-    --navy: #1B2A4A;
-    --gold: #C9A84C;
-    --white: #FFFFFF;
-    --light: #F5F7FA;
-    --grey: #6B7280;
-    --border: #E5E7EB;
+    --navy: #0D1B2A;
+    --navy-mid: #142030;
+    --charcoal: #1C2B3A;
+    --gold: #C8A055;
+    --gold-lt: #DDB96A;
+    --white: #F4EFE6;
+    --light: #F4EFE6;
+    --grey: #6B8299;
+    --border: #D6CEBC;
     --green-bg: #D6EED6;
     --green-fg: #1A6B1A;
     --yellow-bg: #FFF9CC;
@@ -24,7 +37,7 @@
     --blue-fg: #003366;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--light); color: #1F2937; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--light); color: var(--charcoal); }
 
   /* ── Header ── */
   header {
@@ -33,7 +46,7 @@
     position: sticky; top: 0; z-index: 100;
     box-shadow: 0 2px 12px rgba(0,0,0,0.3);
   }
-  header h1 { color: var(--white); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.3px; }
+  header h1 { color: var(--white); font-size: 1.7rem; font-weight: 600; letter-spacing: 0.5px; font-family: 'Cormorant Garamond', Georgia, serif; }
   header p { color: var(--gold); font-size: 0.82rem; margin-top: 4px; opacity: 0.9; }
   .header-meta { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; }
   .stats-row { display: flex; gap: 20px; margin-top: 14px; flex-wrap: wrap; }
@@ -61,11 +74,11 @@
 
   /* ── Property card ── */
   .card {
-    background: white; border-radius: 12px; overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08); border: 1px solid var(--border);
+    background: #FDFAF5; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 1px 4px rgba(13,27,42,0.08); border: 1px solid var(--border);
     transition: transform 0.15s, box-shadow 0.15s;
   }
-  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(13,27,42,0.14); }
   .card.hidden { display: none; }
 
   .card-top {
@@ -138,10 +151,10 @@
 
   .card-actions { padding: 14px 18px; border-top: 1px solid var(--border);
     display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-  .btn-primary { padding: 8px 16px; background: var(--navy); color: white; border-radius: 8px;
+  .btn-primary { padding: 8px 16px; background: var(--navy); color: var(--white); border-radius: 8px;
     font-size: 0.8rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer;
     transition: background 0.15s; }
-  .btn-primary:hover { background: #2d4a80; }
+  .btn-primary:hover { background: var(--charcoal); }
   .btn-secondary { padding: 7px 14px; background: white; color: var(--navy); border: 1.5px solid var(--border);
     border-radius: 8px; font-size: 0.8rem; font-weight: 600; text-decoration: none; cursor: pointer;
     transition: all 0.15s; }
@@ -291,7 +304,7 @@
       </div>
       <div class="card-body">
         <div>
-          <span class="card-price">$889,900</span>
+          <span class="card-price">$889,000</span>
           <span class="card-price-note">Listed May 21 · Open House Jul 5, 1–3pm</span>
         </div>
         <div class="card-meta">
@@ -353,7 +366,7 @@
         <div class="card-top-left">
           <div class="card-rank">Rank #3 · Nova Scotia</div>
           <div class="card-name">4784 Aylesford Road, Lake George</div>
-          <div class="card-loc">Kings County · Annapolis Valley</div>
+          <div class="card-loc">Kings County �� Annapolis Valley</div>
           <span class="verdict-pill verdict-view">✅ WORTH VIEWING</span>
         </div>
         <div class="score-badge score-view">
@@ -613,6 +626,75 @@
       setTimeout(() => { bar.style.width = w; }, 100);
     });
   });
+
+  // ── Build timestamp (Apps Script updates this on every push) ──
+  const PAGE_BUILD_TIME = '2026-06-30T14:00:00';
+
+  // ── Update toast notification ──
+  (function checkForUpdates() {
+    const KEY = 'str_last_build';
+    const lastSeen = localStorage.getItem(KEY);
+    if (lastSeen && lastSeen !== PAGE_BUILD_TIME) {
+      const style = document.createElement('style');
+      style.textContent = '@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(16px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}';
+      document.head.appendChild(style);
+      const toast = document.createElement('div');
+      toast.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#0D1B2A;color:white;padding:13px 26px;border-radius:30px;font-size:0.85rem;font-weight:600;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.35);display:flex;align-items:center;gap:8px;animation:toastIn 0.3s ease;white-space:nowrap;';
+      toast.innerHTML = '✨ Dashboard updated with new properties';
+      document.body.appendChild(toast);
+      setTimeout(() => { toast.style.transition='opacity 0.4s'; toast.style.opacity='0'; setTimeout(()=>toast.remove(),400); }, 4500);
+    }
+    localStorage.setItem(KEY, PAGE_BUILD_TIME);
+  })();
+
+  // ── PWA: icon + manifest + iOS home screen ──
+  (function initPWA() {
+    // Draw branded icon
+    const c = document.createElement('canvas');
+    c.width = c.height = 512;
+    const ctx = c.getContext('2d');
+    // Royal blue background with rounded corners
+    ctx.fillStyle = '#0D1B2A';
+    if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(0,0,512,512,90); ctx.fill(); }
+    else { ctx.fillRect(0,0,512,512); }
+    // Gold circle behind house
+    ctx.fillStyle = '#C8A055';
+    ctx.beginPath(); ctx.arc(256,215,145,0,Math.PI*2); ctx.fill();
+    // House silhouette in navy
+    ctx.fillStyle = '#0D1B2A';
+    ctx.beginPath(); ctx.moveTo(256,105); ctx.lineTo(150,210); ctx.lineTo(362,210); ctx.closePath(); ctx.fill();
+    ctx.fillRect(190,210,132,85);
+    // Door in gold
+    ctx.fillStyle = '#C8A055';
+    ctx.fillRect(232,240,48,55);
+    // "STR" text
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 78px system-ui,sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('STR', 256, 420);
+
+    const iconUrl = c.toDataURL('image/png');
+    const el = document.getElementById('apple-touch-icon');
+    if (el) el.href = iconUrl;
+
+    // Web app manifest
+    const manifest = {
+      name: 'Atlantic Canada STR Scorecard',
+      short_name: 'STR Scorecard',
+      description: 'Private STR property scoring dashboard — Peter & Jennifer Nahas',
+      start_url: './',
+      display: 'standalone',
+      orientation: 'portrait-primary',
+      background_color: '#0D1B2A',
+      theme_color: '#0D1B2A',
+      icons: [
+        { src: iconUrl, sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+        { src: iconUrl, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+      ]
+    };
+    const mEl = document.getElementById('pwa-manifest');
+    if (mEl) mEl.href = 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(manifest));
+  })();
 </script>
 </body>
 </html>
