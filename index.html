@@ -13,9 +13,9 @@
 <link id="pwa-manifest" rel="manifest" href="">
 <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="">
 <title>Atlantic Canada STR Scorecard</title>
-<!-- STYLES: same as str-dashboard.html ??? embed inline for GitHub Pages -->
+<!-- STYLES: same as str-dashboard.html — embed inline for GitHub Pages -->
 <style>
-  /* [Same CSS as str-dashboard.html ??? paste the full CSS block here] */
+  /* [Same CSS as str-dashboard.html — paste the full CSS block here] */
   /* For brevity in the script, reference an external CSS or embed in full deploy */
   :root{--navy:#0D1B2A;--navy-mid:#142030;--charcoal:#1C2B3A;--gold:#C8A055;--gold-lt:#DDB96A;--white:#F4EFE6;--light:#F4EFE6;--grey:#6B8299;--border:#D6CEBC;--grey:#6B7280;--border:#E5E7EB;--green-bg:#D6EED6;--green-fg:#1A6B1A;--yellow-bg:#FFF9CC;--yellow-fg:#7A6000;--red-bg:#FDDEDE;--red-fg:#8B0000;--orange-bg:#FFE8CC;--orange-fg:#7A3B00}
   *{box-sizing:border-box;margin:0;padding:0}body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--light);color:#1F2937}
@@ -69,10 +69,10 @@
 </head>
 <body>
 <header>
-  <div style="display:flex;justify-content:space-between;align-items:flex-end;flew-wrap:wrap;gap:12px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px">
     <div>
-      <h1>???? Atlantic Canada STR Scorecard</h1>
-      <p>Peter &amp; Jennifer Nahas ?? Budget: Under $900K ?? NS ?? NB ?? PEI</p>
+      <h1>🏠 Atlantic Canada STR Scorecard</h1>
+      <p>Peter &amp; Jennifer Nahas · Budget: Under $900K · NS · NB · PEI</p>
     </div>
     <span class="last-updated">Updated: July 1, 2026</span>
   </div>
@@ -85,8 +85,8 @@
 <div class="filters">
   <span class="filter-label">Filter:</span>
   <button class="filter-btn active" onclick="filter('all',this)">All</button>
-  <button class="filter-btn" onclick="filter('strong-buy',this)">???? Strong Buy</button>
-  <button class="filter-btn" onclick="filter('worth-viewing',this)">??? Worth Viewing</button>
+  <button class="filter-btn" onclick="filter('strong-buy',this)">🏆 Strong Buy</button>
+  <button class="filter-btn" onclick="filter('worth-viewing',this)">✅ Worth Viewing</button>
   <span class="filter-label" style="margin-left:12px">Province:</span>
   <button class="filter-btn" onclick="filterProvince('NS',this)">Nova Scotia</button>
   <button class="filter-btn" onclick="filterProvince('PEI',this)">PEI</button>
@@ -94,14 +94,14 @@
 </div>
 <main>
   
-  <div class="section-header"><h2>???? STRONG BUY (75+)</h2><div class="section-line"></div></div>
+  <div class="section-header"><h2>🏆 STRONG BUY (75+)</h2><div class="section-line"></div></div>
   <div class="cards">
       <div class="card" data-verdict="strong-buy" data-province="NS">
         <div class="card-top">
           <div class="card-top-left">
-            <div class="card-rank">Rank #1 ?? NS</div>
+            <div class="card-rank">Rank #1 · NS</div>
             <div class="card-name">287 East Side Martins River Road, Martins River, NS</div>
-            <div class="card-loc">Realtor.ca ?? Score updated 2026-06-30</div>
+            <div class="card-loc">Realtor.ca · Score updated 2026-06-30</div>
             <span class="verdict-pill verdict-buy">STRONG BUY</span>
           </div>
           <div class="score-badge score-buy">
@@ -115,7 +115,7 @@
             <span class="card-price-note">Est. cap rate: 0.104</span>
           </div>
           <div class="card-meta">
-            <div class="meta-chip">???? Waterfront: 8/10</div>
+            <div class="meta-chip">🌊 Waterfront: 8/10</div>
             <div class="meta-chip">Est. revenue: $90K/yr</div>
             <div class="meta-chip">Price/Income: 6/10</div>
           </div>
@@ -124,17 +124,17 @@
             <div class="score-bar-track"><div class="score-bar-fill fill-buy" style="width:82%"></div></div>
           </div>
           <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ??2</span><span style="font-weight:700">16/20</span></div>
+            <div class="breakdown-item"><span class="crit">Waterfront ×2</span><span style="font-weight:700">16/20</span></div>
             <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">9/10</span></div>
             <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">9/10</span></div>
             <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">9/10</span></div>
           </div>
-          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Mahone Bay sailors paradise with separate dock parcel at a motivated $869K ? best South Shore STR opportunity in years."</p>
+          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Mahone Bay sailors paradise with separate dock parcel at a motivated $869K — best South Shore STR opportunity in years."</p>
           <div class="strengths" style="margin-top:12px">
             <h4>Key Flags</h4>
             <div class="flag-row">
-              <span class="flag flag-pos">??? South Shore / Mahone Bay ? NS #1 STR market</span><span class="flag flag-pos">??? Separate oceanfront boathouse parcel with dock + registered mooring</span><span class="flag flag-pos">??? $126K price reduction ? 128 days on market, motivated seller</span>
-              <span class="flag flag-warn">?????? Main house has views, not direct water frontage</span><span class="flag flag-warn">?????? 128 days on market ? investigate reason</span><span class="flag flag-warn">?????? Baseboard heat only ? operating costs</span>
+              <span class="flag flag-pos">✅ South Shore / Mahone Bay — NS #1 STR market</span><span class="flag flag-pos">✅ Separate oceanfront boathouse parcel with dock + registered mooring</span><span class="flag flag-pos">✅ $126K price reduction — 128 days on market, motivated seller</span>
+              <span class="flag flag-warn">⚠️ Main house has views, not direct water frontage</span><span class="flag flag-warn">⚠️ 128 days on market — investigate reason</span><span class="flag flag-warn">⚠️ Baseboard heat only — operating costs</span>
             </div>
           </div>
         </div>
@@ -146,9 +146,9 @@
       <div class="card" data-verdict="worth-viewing" data-province="NS">
         <div class="card-top">
           <div class="card-top-left">
-            <div class="card-rank">Rank #2 ?? NS</div>
+            <div class="card-rank">Rank #2 · NS</div>
             <div class="card-name">268 Montague Street, Lunenburg, Nova Scotia B0J 2C0</div>
-            <div class="card-loc">Realtor.ca ?? Score updated 2026-07-01</div>
+            <div class="card-loc">Realtor.ca · Score updated 2026-07-01</div>
             <span class="verdict-pill verdict-buy">WORTH VIEWING</span>
           </div>
           <div class="score-badge score-view">
@@ -162,7 +162,7 @@
             <span class="card-price-note">Est. cap rate: 0.075</span>
           </div>
           <div class="card-meta">
-            <div class="meta-chip">???? Waterfront: 8/10</div>
+            <div class="meta-chip">🌊 Waterfront: 8/10</div>
             <div class="meta-chip">Est. revenue: $68K/yr</div>
             <div class="meta-chip">Price/Income: 7/10</div>
           </div>
@@ -171,7 +171,7 @@
             <div class="score-bar-track"><div class="score-bar-fill fill-buy" style="width:78%"></div></div>
           </div>
           <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ??2</span><span style="font-weight:700">16/20</span></div>
+            <div class="breakdown-item"><span class="crit">Waterfront ×2</span><span style="font-weight:700">16/20</span></div>
             <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">8/10</span></div>
             <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">8/10</span></div>
             <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">9/10</span></div>
@@ -180,8 +180,8 @@
           <div class="strengths" style="margin-top:12px">
             <h4>Key Flags</h4>
             <div class="flag-row">
-              <span class="flag flag-pos">??? Exceptional waterfront with direct harbour views and working waterfront activity?prime Instagrammable asset</span><span class="flag flag-pos">??? Located in Lunenburg, Atlantic Canada's top tourism destination with year-round anchor draws (Bluenose, galleries, restaurants, heritage sites)</span><span class="flag flag-pos">??? Modern, turnkey 3BR/2BA home with open-concept design and direct street access to village attractions?minimal guest friction</span>
-              <span class="flag flag-warn">?????? Low privacy score (0.06 acres, urban lot) limits appeal to groups seeking seclusion; guest complaints about noise/activity likely</span><span class="flag flag-warn">?????? STR regulation clarity unclear for Lunenburg municipality?need explicit verification before purchase</span><span class="flag flag-warn">?????? Moderate gross yield (~7.5% cap rate) at $895K price point leaves limited margin for vacancy, maintenance, or market softening</span>
+              <span class="flag flag-pos">✅ Exceptional waterfront with direct harbour views and working waterfront activity—prime Instagrammable asset</span><span class="flag flag-pos">✅ Located in Lunenburg, Atlantic Canada's top tourism destination with year-round anchor draws (Bluenose, galleries, restaurants, heritage sites)</span><span class="flag flag-pos">✅ Modern, turnkey 3BR/2BA home with open-concept design and direct street access to village attractions—minimal guest friction</span>
+              <span class="flag flag-warn">⚠️ Low privacy score (0.06 acres, urban lot) limits appeal to groups seeking seclusion; guest complaints about noise/activity likely</span><span class="flag flag-warn">⚠️ STR regulation clarity unclear for Lunenburg municipality—need explicit verification before purchase</span><span class="flag flag-warn">⚠️ Moderate gross yield (~7.5% cap rate) at $895K price point leaves limited margin for vacancy, maintenance, or market softening</span>
             </div>
           </div>
         </div>
@@ -193,9 +193,9 @@
       <div class="card" data-verdict="worth-viewing" data-province="NS">
         <div class="card-top">
           <div class="card-top-left">
-            <div class="card-rank">Rank #3 ?? NS</div>
+            <div class="card-rank">Rank #3 · NS</div>
             <div class="card-name">434 Maccormack Road, Sandford, NS</div>
-            <div class="card-loc">Realtor.ca ?? Score updated 2026-06-30</div>
+            <div class="card-loc">Realtor.ca · Score updated 2026-06-30</div>
             <span class="verdict-pill verdict-buy">WORTH VIEWING</span>
           </div>
           <div class="score-badge score-view">
@@ -209,7 +209,7 @@
             <span class="card-price-note">Est. cap rate: 0.079</span>
           </div>
           <div class="card-meta">
-            <div class="meta-chip">???? Waterfront: 7/10</div>
+            <div class="meta-chip">🌊 Waterfront: 7/10</div>
             <div class="meta-chip">Est. revenue: $65K/yr</div>
             <div class="meta-chip">Price/Income: 4/10</div>
           </div>
@@ -218,17 +218,17 @@
             <div class="score-bar-track"><div class="score-bar-fill fill-buy" style="width:76%"></div></div>
           </div>
           <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ??2</span><span style="font-weight:700">14/20</span></div>
+            <div class="breakdown-item"><span class="crit">Waterfront ×2</span><span style="font-weight:700">14/20</span></div>
             <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">5/10</span></div>
             <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">8/10</span></div>
             <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">5/10</span></div>
           </div>
-          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Best-built property in pipeline ? custom 2011 construction, 3664sqft, exceptional privacy on Taylors Lake. Strong house in a weaker STR market."</p>
+          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Best-built property in pipeline — custom 2011 construction, 3664sqft, exceptional privacy on Taylors Lake. Strong house in a weaker STR market."</p>
           <div class="strengths" style="margin-top:12px">
             <h4>Key Flags</h4>
             <div class="flag-row">
-              <span class="flag flag-pos">??? Custom 2011 build ? 3,664 sqft, in-floor heat, premium finishes ? STR-ready immediately</span><span class="flag flag-pos">??? Best privacy in pipeline ? 6.47 acres, barely visible from road, motorboat-free lake</span><span class="flag flag-pos">??? Just listed (2 days) ? no price fatigue, negotiating window open</span>
-              <span class="flag flag-warn">?????? Yarmouth/Acadian Shores STR market unproven for premium yields</span><span class="flag flag-warn">?????? Freshwater lake, no motorized boats ? limits water activity for guests</span><span class="flag flag-warn">?????? At $825K income math requires high occupancy ? est. 7?8% gross yield</span>
+              <span class="flag flag-pos">✅ Custom 2011 build — 3,664 sqft, in-floor heat, premium finishes — STR-ready immediately</span><span class="flag flag-pos">✅ Best privacy in pipeline — 6.47 acres, barely visible from road, motorboat-free lake</span><span class="flag flag-pos">✅ Just listed (2 days) — no price fatigue, negotiating window open</span>
+              <span class="flag flag-warn">⚠️ Yarmouth/Acadian Shores STR market unproven for premium yields</span><span class="flag flag-warn">⚠️ Freshwater lake, no motorized boats — limits water activity for guests</span><span class="flag flag-warn">⚠️ At $825K income math requires high occupancy — est. 7–8% gross yield</span>
             </div>
           </div>
         </div>
@@ -237,14 +237,14 @@
         </div>
       </div></div>
   
-  <div class="section-header" style="margin-top:36px"><h2>??? WORTH VIEWING (55???74)</h2><div class="section-line"></div></div>
+  <div class="section-header" style="margin-top:36px"><h2>✅ WORTH VIEWING (55–74)</h2><div class="section-line"></div></div>
   <div class="cards">
       <div class="card" data-verdict="worth-viewing" data-province="NS">
         <div class="card-top">
           <div class="card-top-left">
-            <div class="card-rank">Rank #4 ?? NS</div>
+            <div class="card-rank">Rank #4 · NS</div>
             <div class="card-name">3653 West Bay Road, St. Georges Channel, NS</div>
-            <div class="card-loc">Realtor.ca ?? Score updated 2026-06-30</div>
+            <div class="card-loc">Realtor.ca · Score updated 2026-06-30</div>
             <span class="verdict-pill verdict-view">WORTH VIEWING</span>
           </div>
           <div class="score-badge score-view">
@@ -258,7 +258,7 @@
             <span class="card-price-note">Est. cap rate: 0.118</span>
           </div>
           <div class="card-meta">
-            <div class="meta-chip">???? Waterfront: 8/10</div>
+            <div class="meta-chip">🌊 Waterfront: 8/10</div>
             <div class="meta-chip">Est. revenue: $47K/yr</div>
             <div class="meta-chip">Price/Income: 9/10</div>
           </div>
@@ -267,17 +267,17 @@
             <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:73%"></div></div>
           </div>
           <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ??2</span><span style="font-weight:700">16/20</span></div>
+            <div class="breakdown-item"><span class="crit">Waterfront ×2</span><span style="font-weight:700">16/20</span></div>
             <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">7/10</span></div>
             <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">7/10</span></div>
             <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">6/10</span></div>
           </div>
-          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Bras d'Or Lake UNESCO inland sea at $399K ? extraordinary value for Cape Breton waterfront. Needs investment but income math works well."</p>
+          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Bras d'Or Lake UNESCO inland sea at $399K — extraordinary value for Cape Breton waterfront. Needs investment but income math works well."</p>
           <div class="strengths" style="margin-top:12px">
             <h4>Key Flags</h4>
             <div class="flag-row">
-              <span class="flag flag-pos">??? Bras d'Or Lake UNESCO biosphere inland sea ? irreplaceable setting, 151ft frontage + beach</span><span class="flag flag-pos">??? $399K for Bras d'Or waterfront ? best $/frontage-foot in the pipeline</span><span class="flag flag-pos">??? Cape Breton STR market growing fast ? Cabot Trail + golf driving demand up</span>
-              <span class="flag flag-warn">?????? House needs $30-50K in upgrades (heat pump, flooring) before premium STR tier</span><span class="flag flag-warn">?????? Baseboard heat only ? expensive off-season operating costs</span><span class="flag flag-warn">?????? Remote ? 3.5 hrs Halifax, 1 hr Sydney</span>
+              <span class="flag flag-pos">✅ Bras d'Or Lake UNESCO biosphere inland sea — irreplaceable setting, 151ft frontage + beach</span><span class="flag flag-pos">✅ $399K for Bras d'Or waterfront — best $/frontage-foot in the pipeline</span><span class="flag flag-pos">✅ Cape Breton STR market growing fast — Cabot Trail + golf driving demand up</span>
+              <span class="flag flag-warn">⚠️ House needs $30-50K in upgrades (heat pump, flooring) before premium STR tier</span><span class="flag flag-warn">⚠️ Baseboard heat only — expensive off-season operating costs</span><span class="flag flag-warn">⚠️ Remote — 3.5 hrs Halifax, 1 hr Sydney</span>
             </div>
           </div>
         </div>
@@ -289,9 +289,9 @@
       <div class="card" data-verdict="worth-viewing" data-province="PEI">
         <div class="card-top">
           <div class="card-top-left">
-            <div class="card-rank">Rank #5 ?? PEI</div>
+            <div class="card-rank">Rank #5 · PEI</div>
             <div class="card-name">3 Stacy Lane, St. Nicholas, Prince Edward Island C0B 1T0</div>
-            <div class="card-loc">Realtor.ca ?? Score updated 2026-07-01</div>
+            <div class="card-loc">Realtor.ca · Score updated 2026-07-01</div>
             <span class="verdict-pill verdict-view">WORTH VIEWING</span>
           </div>
           <div class="score-badge score-view">
@@ -305,7 +305,7 @@
             <span class="card-price-note">Est. cap rate: 0.064</span>
           </div>
           <div class="card-meta">
-            <div class="meta-chip">???? Waterfront: 16/10</div>
+            <div class="meta-chip">🌊 Waterfront: 16/10</div>
             <div class="meta-chip">Est. revenue: $48K/yr</div>
             
           </div>
@@ -314,17 +314,17 @@
             <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:72%"></div></div>
           </div>
           <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ??2</span><span style="font-weight:700">32/20</span></div>
+            <div class="breakdown-item"><span class="crit">Waterfront ×2</span><span style="font-weight:700">32/20</span></div>
             <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">6/10</span></div>
             <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">7/10</span></div>
             <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">5/10</span></div>
           </div>
-          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Stunning waterfront privacy and garage appeal offset moderate income potential due to rural PEI location and 3-bed ceiling?strong personal-use or niche-market angle, weak institutional yield."</p>
+          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Stunning waterfront privacy and garage appeal offset moderate income potential due to rural PEI location and 3-bed ceiling—strong personal-use or niche-market angle, weak institutional yield."</p>
           <div class="strengths" style="margin-top:12px">
             <h4>Key Flags</h4>
             <div class="flag-row">
-              <span class="flag flag-pos">??? True waterfront on 1.3 acres with direct ocean access and stunning views?foundational STR asset</span><span class="flag flag-pos">??? Exceptional privacy and seclusion in sought-after Sunbury Cove; mature trees and acreage command premium nightly rates</span><span class="flag flag-pos">??? Quad garage (18?44 oversized bay) enables unique positioning: boat/RV storage, water-sports rental partnerships, adventure tourism angle</span>
-              <span class="flag flag-warn">?????? Sunbury Cove/St. Nicholas lacks proven STR ecosystem; limited comparable rental data and lower anchor tourism draw vs. Charlottetown/Cavendish</span><span class="flag flag-warn">?????? Only 3 bedrooms limits group occupancy and revenue ceiling; PEI's peak season (June?September) is 16 weeks?shoulder seasons soft</span><span class="flag flag-warn">?????? Municipal STR regulation unclear; PEI allowances vary by area; need confirmation on zoning and licensing before purchase</span>
+              <span class="flag flag-pos">✅ True waterfront on 1.3 acres with direct ocean access and stunning views—foundational STR asset</span><span class="flag flag-pos">✅ Exceptional privacy and seclusion in sought-after Sunbury Cove; mature trees and acreage command premium nightly rates</span><span class="flag flag-pos">✅ Quad garage (18×44 oversized bay) enables unique positioning: boat/RV storage, water-sports rental partnerships, adventure tourism angle</span>
+              <span class="flag flag-warn">⚠️ Sunbury Cove/St. Nicholas lacks proven STR ecosystem; limited comparable rental data and lower anchor tourism draw vs. Charlottetown/Cavendish</span><span class="flag flag-warn">⚠️ Only 3 bedrooms limits group occupancy and revenue ceiling; PEI's peak season (June–September) is 16 weeks—shoulder seasons soft</span><span class="flag flag-warn">⚠️ Municipal STR regulation unclear; PEI allowances vary by area; need confirmation on zoning and licensing before purchase</span>
             </div>
           </div>
         </div>
@@ -336,9 +336,9 @@
       <div class="card" data-verdict="worth-viewing" data-province="PEI">
         <div class="card-top">
           <div class="card-top-left">
-            <div class="card-rank">Rank #6 ?? PEI</div>
+            <div class="card-rank">Rank #6 · PEI</div>
             <div class="card-name">1067 Cape Bear Road, Murray Harbour, Prince Edward Island C0A1V0</div>
-            <div class="card-loc">Realtor.ca ?? Score updated 2026-06-30</div>
+            <div class="card-loc">Realtor.ca · Score updated 2026-06-30</div>
             <span class="verdict-pill verdict-view">WORTH VIEWING</span>
           </div>
           <div class="score-badge score-view">
@@ -352,7 +352,7 @@
             <span class="card-price-note">Est. cap rate: 0.087</span>
           </div>
           <div class="card-meta">
-            <div class="meta-chip">???? Waterfront: 8/10</div>
+            <div class="meta-chip">🌊 Waterfront: 8/10</div>
             <div class="meta-chip">Est. revenue: $32K/yr</div>
             <div class="meta-chip">Price/Income: 7/10</div>
           </div>
@@ -361,7 +361,7 @@
             <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:64%"></div></div>
           </div>
           <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ??2</span><span style="font-weight:700">16/20</span></div>
+            <div class="breakdown-item"><span class="crit">Waterfront ×2</span><span style="font-weight:700">16/20</span></div>
             <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">5/10</span></div>
             <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">6/10</span></div>
             <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">6/10</span></div>
@@ -370,8 +370,8 @@
           <div class="strengths" style="margin-top:12px">
             <h4>Key Flags</h4>
             <div class="flag-row">
-              <span class="flag flag-pos">??? Exceptional waterfront: 600ft shoreline on 27 acres with direct ocean access and RV power infrastructure</span><span class="flag flag-pos">??? Outstanding privacy and seclusion ideal for retreats and multi-family bookings</span><span class="flag flag-pos">??? Exceptional price-to-asset ratio well under budget with strong bones and rural development potential</span>
-              <span class="flag flag-warn">?????? Murray Harbour is a quiet village with limited proven STR demand and no major anchor attractions within drive time</span><span class="flag flag-warn">?????? 3-bedroom farmhouse layout and 1910 construction may require significant upgrades for modern STR guest expectations</span><span class="flag flag-warn">?????? Regulatory clarity on STR zoning in rural PEI and seasonal occupancy patterns poorly documented</span>
+              <span class="flag flag-pos">✅ Exceptional waterfront: 600ft shoreline on 27 acres with direct ocean access and RV power infrastructure</span><span class="flag flag-pos">✅ Outstanding privacy and seclusion ideal for retreats and multi-family bookings</span><span class="flag flag-pos">✅ Exceptional price-to-asset ratio well under budget with strong bones and rural development potential</span>
+              <span class="flag flag-warn">⚠️ Murray Harbour is a quiet village with limited proven STR demand and no major anchor attractions within drive time</span><span class="flag flag-warn">⚠️ 3-bedroom farmhouse layout and 1910 construction may require significant upgrades for modern STR guest expectations</span><span class="flag flag-warn">⚠️ Regulatory clarity on STR zoning in rural PEI and seasonal occupancy patterns poorly documented</span>
             </div>
           </div>
         </div>
@@ -383,9 +383,9 @@
       <div class="card" data-verdict="worth-viewing" data-province="PEI">
         <div class="card-top">
           <div class="card-top-left">
-            <div class="card-rank">Rank #7 ?? PEI</div>
+            <div class="card-rank">Rank #7 · PEI</div>
             <div class="card-name">10 Chestnut Street, Charlottetown, Prince Edward Island P1A1Z5</div>
-            <div class="card-loc">Realtor.ca ?? Score updated 2026-06-30</div>
+            <div class="card-loc">Realtor.ca · Score updated 2026-06-30</div>
             <span class="verdict-pill verdict-view">WORTH VIEWING</span>
           </div>
           <div class="score-badge score-view">
@@ -399,7 +399,7 @@
             <span class="card-price-note">Est. cap rate: 0.076</span>
           </div>
           <div class="card-meta">
-            <div class="meta-chip">???? Waterfront: 3/10</div>
+            <div class="meta-chip">🌊 Waterfront: 3/10</div>
             <div class="meta-chip">Est. revenue: $48K/yr</div>
             <div class="meta-chip">Price/Income: 7/10</div>
           </div>
@@ -408,17 +408,17 @@
             <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:62%"></div></div>
           </div>
           <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ??2</span><span style="font-weight:700">6/20</span></div>
+            <div class="breakdown-item"><span class="crit">Waterfront ×2</span><span style="font-weight:700">6/20</span></div>
             <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">7/10</span></div>
             <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">5/10</span></div>
             <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">9/10</span></div>
           </div>
-          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Urban duplex with solid downtown appeal and dual-income potential, but lacks waterfront access and privacy?pass for waterfront-focused investors."</p>
+          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Urban duplex with solid downtown appeal and dual-income potential, but lacks waterfront access and privacy—pass for waterfront-focused investors."</p>
           <div class="strengths" style="margin-top:12px">
             <h4>Key Flags</h4>
             <div class="flag-row">
-              <span class="flag flag-pos">??? Prime downtown Charlottetown location walking distance to waterfront, restaurants, shops, and tourism anchors</span><span class="flag flag-pos">??? Dual-unit duplex structure enables 50% occupancy offset model or full STR conversion with strong seasonal demand</span><span class="flag flag-pos">??? Well-updated turnkey property with modern finishes and 4BR/4BA total capacity appeals to family groups and events</span>
-              <span class="flag flag-warn">?????? No direct waterfront frontage?'short walk' to water fails core selection criterion for premium Atlantic Canada STR yields</span><span class="flag flag-warn">?????? Duplex regulatory status may restrict STR zoning permits; municipal bylaws on multi-unit rentals unclear</span><span class="flag flag-warn">?????? Limited privacy and seclusion (0.05 acres, downtown lot) reduces appeal for high-margin luxury guests seeking retreat experience</span>
+              <span class="flag flag-pos">✅ Prime downtown Charlottetown location walking distance to waterfront, restaurants, shops, and tourism anchors</span><span class="flag flag-pos">✅ Dual-unit duplex structure enables 50% occupancy offset model or full STR conversion with strong seasonal demand</span><span class="flag flag-pos">✅ Well-updated turnkey property with modern finishes and 4BR/4BA total capacity appeals to family groups and events</span>
+              <span class="flag flag-warn">⚠️ No direct waterfront frontage—'short walk' to water fails core selection criterion for premium Atlantic Canada STR yields</span><span class="flag flag-warn">⚠️ Duplex regulatory status may restrict STR zoning permits; municipal bylaws on multi-unit rentals unclear</span><span class="flag flag-warn">⚠️ Limited privacy and seclusion (0.05 acres, downtown lot) reduces appeal for high-margin luxury guests seeking retreat experience</span>
             </div>
           </div>
         </div>
@@ -430,9 +430,9 @@
       <div class="card" data-verdict="worth-viewing" data-province="PEI">
         <div class="card-top">
           <div class="card-top-left">
-            <div class="card-rank">Rank #8 ?? PEI</div>
+            <div class="card-rank">Rank #8 · PEI</div>
             <div class="card-name">14 Southport Drive, Stratford, Prince Edward Island C1B 2A6</div>
-            <div class="card-loc">Realtor.ca ?? Score updated 2026-06-30</div>
+            <div class="card-loc">Realtor.ca · Score updated 2026-06-30</div>
             <span class="verdict-pill verdict-view">WORTH VIEWING</span>
           </div>
           <div class="score-badge score-view">
@@ -446,7 +446,7 @@
             <span class="card-price-note">Est. cap rate: 0.093</span>
           </div>
           <div class="card-meta">
-            <div class="meta-chip">???? Waterfront: 5/10</div>
+            <div class="meta-chip">🌊 Waterfront: 5/10</div>
             <div class="meta-chip">Est. revenue: $43K/yr</div>
             <div class="meta-chip">Price/Income: 7/10</div>
           </div>
@@ -455,7 +455,7 @@
             <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:62%"></div></div>
           </div>
           <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ??2</span><span style="font-weight:700">10/20</span></div>
+            <div class="breakdown-item"><span class="crit">Waterfront ×2</span><span style="font-weight:700">10/20</span></div>
             <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">6/10</span></div>
             <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">5/10</span></div>
             <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">8/10</span></div>
@@ -464,8 +464,8 @@
           <div class="strengths" style="margin-top:12px">
             <h4>Key Flags</h4>
             <div class="flag-row">
-              <span class="flag flag-pos">??? Exceptional proximity to downtown Charlottetown (5 min) and waterfront trails?strong tourism anchor</span><span class="flag flag-pos">??? Well-maintained 2,000+ sq ft with 3 bed/2 bath + flex rooms provides multi-unit rental flexibility</span><span class="flag flag-pos">??? Heated above-ground pool and entertaining deck are high-appeal guest amenities for summer peak season</span>
-              <span class="flag flag-warn">?????? No confirmed direct waterfront access (only 'near' trails)?materially limits waterfront premium pricing</span><span class="flag flag-warn">?????? PEI STR regulations require owner-occupied or municipal approval; Stratford zoning status unclear</span><span class="flag flag-warn">?????? Summer-peak dependent market; limited winter draw without premium all-season positioning (ski, spa, events)</span>
+              <span class="flag flag-pos">✅ Exceptional proximity to downtown Charlottetown (5 min) and waterfront trails—strong tourism anchor</span><span class="flag flag-pos">✅ Well-maintained 2,000+ sq ft with 3 bed/2 bath + flex rooms provides multi-unit rental flexibility</span><span class="flag flag-pos">✅ Heated above-ground pool and entertaining deck are high-appeal guest amenities for summer peak season</span>
+              <span class="flag flag-warn">⚠️ No confirmed direct waterfront access (only 'near' trails)—materially limits waterfront premium pricing</span><span class="flag flag-warn">⚠️ PEI STR regulations require owner-occupied or municipal approval; Stratford zoning status unclear</span><span class="flag flag-warn">⚠️ Summer-peak dependent market; limited winter draw without premium all-season positioning (ski, spa, events)</span>
             </div>
           </div>
         </div>
@@ -477,9 +477,9 @@
       <div class="card" data-verdict="worth-viewing" data-province="PEI">
         <div class="card-top">
           <div class="card-top-left">
-            <div class="card-rank">Rank #9 ?? PEI</div>
+            <div class="card-rank">Rank #9 · PEI</div>
             <div class="card-name">190 Harvard Street, Summerside, Prince Edward Island C1N1R6</div>
-            <div class="card-loc">Realtor.ca ?? Score updated 2026-06-30</div>
+            <div class="card-loc">Realtor.ca · Score updated 2026-06-30</div>
             <span class="verdict-pill verdict-view">WORTH VIEWING</span>
           </div>
           <div class="score-badge score-view">
@@ -493,7 +493,7 @@
             <span class="card-price-note">Est. cap rate: 0.074</span>
           </div>
           <div class="card-meta">
-            <div class="meta-chip">???? Waterfront: 5/10</div>
+            <div class="meta-chip">🌊 Waterfront: 5/10</div>
             <div class="meta-chip">Est. revenue: $32K/yr</div>
             <div class="meta-chip">Price/Income: 7/10</div>
           </div>
@@ -502,7 +502,7 @@
             <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:62%"></div></div>
           </div>
           <div class="breakdown">
-            <div class="breakdown-item"><span class="crit">Waterfront ??2</span><span style="font-weight:700">10/20</span></div>
+            <div class="breakdown-item"><span class="crit">Waterfront ×2</span><span style="font-weight:700">10/20</span></div>
             <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">6/10</span></div>
             <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">5/10</span></div>
             <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">9/10</span></div>
@@ -511,8 +511,8 @@
           <div class="strengths" style="margin-top:12px">
             <h4>Key Flags</h4>
             <div class="flag-row">
-              <span class="flag flag-pos">??? Prime downtown Summerside location with walkable access to waterfront boardwalk, restaurants, and cultural venues</span><span class="flag flag-pos">??? Excellent infrastructure: year-round paved access, full utilities, low property taxes ($2,094)</span><span class="flag flag-pos">??? Affordable entry point ($429,900) well below budget ceiling with modern renovations maintaining character appeal</span>
-              <span class="flag flag-warn">?????? No direct waterfront frontage?proximity only, missing double-weighted waterfront revenue multiplier</span><span class="flag flag-warn">?????? Limited privacy and seclusion on 0.134 acres in downtown core reduces luxury positioning</span><span class="flag flag-warn">?????? Summerside STR market unproven; lacks comparable rental data and seasonal demand verification vs. Charlottetown/Cavendish</span>
+              <span class="flag flag-pos">✅ Prime downtown Summerside location with walkable access to waterfront boardwalk, restaurants, and cultural venues</span><span class="flag flag-pos">✅ Excellent infrastructure: year-round paved access, full utilities, low property taxes ($2,094)</span><span class="flag flag-pos">✅ Affordable entry point ($429,900) well below budget ceiling with modern renovations maintaining character appeal</span>
+              <span class="flag flag-warn">⚠️ No direct waterfront frontage—proximity only, missing double-weighted waterfront revenue multiplier</span><span class="flag flag-warn">⚠️ Limited privacy and seclusion on 0.134 acres in downtown core reduces luxury positioning</span><span class="flag flag-warn">⚠️ Summerside STR market unproven; lacks comparable rental data and seasonal demand verification vs. Charlottetown/Cavendish</span>
             </div>
           </div>
         </div>
@@ -522,15 +522,15 @@
       </div></div>
 </main>
 <footer>
-  <p><strong>Atlantic Canada STR Scorecard</strong> ?? Auto-updated via Gmail + Claude API</p>
+  <p><strong>Atlantic Canada STR Scorecard</strong> · Auto-updated via Gmail + Claude API</p>
   <p style="margin-top:6px">Last updated: July 1, 2026</p>
 </footer>
 <script>
-  const PAGE_BUILD_TIME='2026-07-01T11:27:31.110Z';
-  function filter(v,btn){document.querySelectorAll('.filter-btn').forEach(b=>{if(['All','???? Strong Buy','??? Worth Viewing'].some(t=>b.textContent.includes(t.replace(/????|???/g,'').trim())))b.classList.remove('active')});btn.classList.add('active');document.querySelectorAll('.card[data-verdict]').forEach(c=>{c.classList.toggle('hidden',v!=='all'&&c.dataset.verdict!==v)});}
+  const PAGE_BUILD_TIME='2026-07-01T19:26:39.193Z';
+  function filter(v,btn){document.querySelectorAll('.filter-btn').forEach(b=>{if(['All','🏆 Strong Buy','✅ Worth Viewing'].some(t=>b.textContent.includes(t.replace(/🏆|✅/g,'').trim())))b.classList.remove('active')});btn.classList.add('active');document.querySelectorAll('.card[data-verdict]').forEach(c=>{c.classList.toggle('hidden',v!=='all'&&c.dataset.verdict!==v)});}
   function filterProvince(p,btn){if(btn.classList.contains('active')){btn.classList.remove('active');document.querySelectorAll('.card[data-province]').forEach(c=>c.classList.remove('hidden'));}else{document.querySelectorAll('.filter-btn').forEach(b=>{if(['Nova Scotia','PEI','New Brunswick'].includes(b.textContent))b.classList.remove('active')});btn.classList.add('active');document.querySelectorAll('.card[data-province]').forEach(c=>c.classList.toggle('hidden',c.dataset.province!==p));}}
   window.addEventListener('load',()=>{document.querySelectorAll('.score-bar-fill').forEach(b=>{const w=b.style.width;b.style.width='0';setTimeout(()=>{b.style.width=w;},100);});});
-  (function checkForUpdates(){const K='str_last_build',last=localStorage.getItem(K);if(last&&last!==PAGE_BUILD_TIME){const s=document.createElement('style');s.textContent='@keyframes tIn{from{opacity:0;transform:translateX(-50%) translateY(16px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}';document.head.appendChild(s);const t=document.createElement('div');t.style.cssText='position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#0D1B2A;color:white;padding:13px 26px;border-radius:30px;font-size:.85rem;font-weight:600;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.35);display:flex;align-items:center;gap:8px;animation:tIn .3s ease;white-space:nowrap;';t.innerHTML='??? Dashboard updated with new properties';document.body.appendChild(t);setTimeout(()=>{t.style.transition='opacity .4s';t.style.opacity='0';setTimeout(()=>t.remove(),400);},4500);}localStorage.setItem(K,PAGE_BUILD_TIME);})();
+  (function checkForUpdates(){const K='str_last_build',last=localStorage.getItem(K);if(last&&last!==PAGE_BUILD_TIME){const s=document.createElement('style');s.textContent='@keyframes tIn{from{opacity:0;transform:translateX(-50%) translateY(16px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}';document.head.appendChild(s);const t=document.createElement('div');t.style.cssText='position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#0D1B2A;color:white;padding:13px 26px;border-radius:30px;font-size:.85rem;font-weight:600;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.35);display:flex;align-items:center;gap:8px;animation:tIn .3s ease;white-space:nowrap;';t.innerHTML='✨ Dashboard updated with new properties';document.body.appendChild(t);setTimeout(()=>{t.style.transition='opacity .4s';t.style.opacity='0';setTimeout(()=>t.remove(),400);},4500);}localStorage.setItem(K,PAGE_BUILD_TIME);})();
   (function initPWA(){const c=document.createElement('canvas');c.width=c.height=512;const x=c.getContext('2d');x.fillStyle='#0D1B2A';if(x.roundRect){x.beginPath();x.roundRect(0,0,512,512,90);x.fill();}else x.fillRect(0,0,512,512);x.fillStyle='#C8A055';x.beginPath();x.arc(256,215,145,0,Math.PI*2);x.fill();x.fillStyle='#0D1B2A';x.beginPath();x.moveTo(256,105);x.lineTo(150,210);x.lineTo(362,210);x.closePath();x.fill();x.fillRect(190,210,132,85);x.fillStyle='#C8A055';x.fillRect(232,240,48,55);x.fillStyle='#FFFFFF';x.font='bold 78px system-ui,sans-serif';x.textAlign='center';x.fillText('STR',256,420);const icon=c.toDataURL('image/png');const ai=document.getElementById('apple-touch-icon');if(ai)ai.href=icon;const m={name:'Atlantic Canada STR Scorecard',short_name:'STR Scorecard',start_url:'./',display:'standalone',background_color:'#0D1B2A',theme_color:'#0D1B2A',icons:[{src:icon,sizes:'192x192',type:'image/png',purpose:'any maskable'},{src:icon,sizes:'512x512',type:'image/png',purpose:'any maskable'}]};const ml=document.getElementById('pwa-manifest');if(ml)ml.href='data:application/manifest+json,'+encodeURIComponent(JSON.stringify(m));})();
 </script>
 </body>
