@@ -74,12 +74,12 @@
       <h1>🏠 Atlantic Canada STR Scorecard</h1>
       <p>Peter &amp; Jennifer Nahas · Budget: Under $900K · NS · NB · PEI</p>
     </div>
-    <span class="last-updated">Updated: July 3, 2026 at 9:28 a.m. AT</span>
+    <span class="last-updated">Updated: July 3, 2026 at 10:58 a.m. AT</span>
   </div>
   <div class="stats-row">
-    <div class="stat-chip"><span>27</span> properties scored</div>
+    <div class="stat-chip"><span>28</span> properties scored</div>
     <div class="stat-chip"><span>5</span> Strong Buy</div>
-    <div class="stat-chip"><span>19</span> Worth Viewing</div>
+    <div class="stat-chip"><span>20</span> Worth Viewing</div>
   </div>
 </header>
 <div class="filters">
@@ -1224,14 +1224,61 @@
         <div class="card-actions">
           <a href="https://www.realtor.ca/real-estate/29977072/180-highfield-street-moncton" target="_blank" class="btn-primary">View Listing</a>
         </div>
+      </div>
+
+      <div class="card" data-verdict="worth-viewing" data-province="NS">
+        <div class="card-top">
+          <div class="card-top-left">
+            <div class="card-rank">Rank #25 · NS</div>
+            <div class="card-name">110 Long Lake Road, East Uniacke, Nova Scotia</div>
+            <div class="card-loc">Viewpoint · Score updated 2026-07-03</div>
+            <span class="verdict-pill verdict-view">MONITOR</span>
+          </div>
+          <div class="score-badge score-monitor">
+            <span class="num">58</span>
+            <span class="denom">/100</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div>
+            <span class="card-price">$499,900</span>
+            <span class="card-price-note">Est. cap rate: 0.056</span>
+          </div>
+          <div class="card-meta">
+            <div class="meta-chip">🌊 Waterfront: 7/10</div>
+            <div class="meta-chip">Est. revenue: $28K/yr</div>
+            <div class="meta-chip">Price/Income: 6/10</div>
+          </div>
+          <div class="score-bar">
+            <div class="score-bar-label"><span>Score</span><span>58/100</span></div>
+            <div class="score-bar-track"><div class="score-bar-fill fill-view" style="width:58%"></div></div>
+          </div>
+          <div class="breakdown">
+            <div class="breakdown-item"><span class="crit">Waterfront ×2</span><span style="font-weight:700">14/20</span></div>
+            <div class="breakdown-item"><span class="crit">STR Market</span><span style="font-weight:700">5/10</span></div>
+            <div class="breakdown-item"><span class="crit">Unique Factor</span><span style="font-weight:700">5/10</span></div>
+            <div class="breakdown-item"><span class="crit">Proximity</span><span style="font-weight:700">4/10</span></div>
+          </div>
+          <p style="margin-top:12px;font-size:0.82rem;color:#374151;font-style:italic">"Affordable lakefront hideaway with solid privacy and road access, but remote location and freshwater positioning limit high-income STR potential vs coastal Atlantic alternatives."</p>
+          <div class="strengths" style="margin-top:12px">
+            <h4>Key Flags</h4>
+            <div class="flag-row">
+              <span class="flag flag-pos">✅ Affordable entry price ($499.9K) well below $900K ceiling with lakefront access</span><span class="flag flag-pos">✅ Strong privacy and seclusion on substantial acreage ideal for couples/small groups</span><span class="flag flag-pos">✅ Year-round paved road access and utilities support reliable operational logistics</span>
+              <span class="flag flag-warn">⚠️ Freshwater lake (not ocean) limits premium pricing and seasonal appeal vs coastal properties</span><span class="flag flag-warn">⚠️ Remote location 45+ minutes from Halifax anchors; minimal foot traffic or tourism draw</span><span class="flag flag-warn">⚠️ Unproven STR track record; limited comparable rentals nearby constrains demand validation</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="https://www.viewpoint.ca/NVHkG" target="_blank" class="btn-primary">View Listing</a>
+        </div>
       </div></div>
 </main>
 <footer>
   <p><strong>Atlantic Canada STR Scorecard</strong> · Auto-updated via Gmail + Claude API</p>
-  <p style="margin-top:6px">Last updated: July 3, 2026 at 9:28 a.m. AT</p>
+  <p style="margin-top:6px">Last updated: July 3, 2026 at 10:58 a.m. AT</p>
 </footer>
 <script>
-  const PAGE_BUILD_TIME='2026-07-03T12:28:05.367Z';
+  const PAGE_BUILD_TIME='2026-07-03T13:58:05.083Z';
   function filter(v,btn){document.querySelectorAll('.filter-btn').forEach(b=>{if(['All','🏆 Strong Buy','✅ Worth Viewing'].some(t=>b.textContent.includes(t.replace(/🏆|✅/g,'').trim())))b.classList.remove('active')});btn.classList.add('active');document.querySelectorAll('.card[data-verdict]').forEach(c=>{c.classList.toggle('hidden',v!=='all'&&c.dataset.verdict!==v)});}
   function filterProvince(p,btn){if(btn.classList.contains('active')){btn.classList.remove('active');document.querySelectorAll('.card[data-province]').forEach(c=>c.classList.remove('hidden'));}else{document.querySelectorAll('.filter-btn').forEach(b=>{if(['Nova Scotia','PEI','New Brunswick'].includes(b.textContent))b.classList.remove('active')});btn.classList.add('active');document.querySelectorAll('.card[data-province]').forEach(c=>c.classList.toggle('hidden',c.dataset.province!==p));}}
   window.addEventListener('load',()=>{document.querySelectorAll('.score-bar-fill').forEach(b=>{const w=b.style.width;b.style.width='0';setTimeout(()=>{b.style.width=w;},100);});});
