@@ -82,10 +82,10 @@
       <h1>🏠 Atlantic Canada STR Scorecard</h1>
       <p>Peter &amp; Jennifer Nahas · Budget: Under $900K · NS · NB · PEI</p>
     </div>
-    <span class="last-updated">Updated: August 21, 2026 at 3:10 p.m. AT</span>
+    <span class="last-updated">Updated: August 22, 2026 at 8:09 a.m. AT</span>
   </div>
   <div class="stats-row">
-    <div class="stat-chip"><span>27</span> properties scored</div>
+    <div class="stat-chip"><span>28</span> properties scored</div>
     <div class="stat-chip"><span>0</span> Strong Buy</div>
     <div class="stat-chip"><span>21</span> Worth Viewing</div>
   </div>
@@ -101,7 +101,7 @@
   <button class="filter-btn" data-group="province" onclick="filterProvince('NB',this)">New Brunswick</button>
   <span class="filter-label" style="margin-left:12px">Added:</span>
   <button class="filter-btn active" data-group="date" onclick="filterDate(null,this)">All Dates</button>
-  <button class="filter-btn" data-group="date" onclick="filterDate('2026-08-21',this)">Aug 21</button><button class="filter-btn" data-group="date" onclick="filterDate('2026-08-20',this)">Aug 20</button><button class="filter-btn" data-group="date" onclick="filterDate('2026-08-19',this)">Aug 19</button><button class="filter-btn" data-group="date" onclick="filterDate('2026-08-18',this)">Aug 18</button>
+  <button class="filter-btn" data-group="date" onclick="filterDate('2026-08-22',this)">Aug 22</button><button class="filter-btn" data-group="date" onclick="filterDate('2026-08-21',this)">Aug 21</button><button class="filter-btn" data-group="date" onclick="filterDate('2026-08-20',this)">Aug 20</button><button class="filter-btn" data-group="date" onclick="filterDate('2026-08-19',this)">Aug 19</button><button class="filter-btn" data-group="date" onclick="filterDate('2026-08-18',this)">Aug 18</button>
 </div>
 <div class="view-toggle">
   <button class="view-btn active" id="viewListBtn" onclick="showView('list')">📋 List</button>
@@ -1127,16 +1127,16 @@
       <span><span class="map-dot" style="background:#F9A825"></span> Worth Viewing</span>
     </div>
     <div id="propertyMap"></div>
-    <p class="map-note">9 of 27 properties mapped · 18 pending geocoding (run backfillGeocoding() in Apps Script)</p>
+    <p class="map-note">9 of 28 properties mapped · 19 pending geocoding (run backfillGeocoding() in Apps Script)</p>
   </div>
 </main>
 <footer>
   <p><strong>Atlantic Canada STR Scorecard</strong> · Auto-updated via Gmail + Claude API</p>
-  <p style="margin-top:6px">Last updated: August 21, 2026 at 3:10 p.m. AT</p>
+  <p style="margin-top:6px">Last updated: August 22, 2026 at 8:09 a.m. AT</p>
 </footer>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  const PAGE_BUILD_TIME='2026-08-21T18:10:10.296Z';
+  const PAGE_BUILD_TIME='2026-08-22T11:09:59.652Z';
   const WEBAPP_URL='';
   const MAP_PROPERTIES=[{"lat":44.6359528,"lng":-64.5971349,"addr":"590 Gilberts Lane, Maplewood, Nova Scotia B0R 1A0","price":"$550,000","score":71,"verdict":"worth-viewing","province":"NS","url":"https://www.viewpoint.ca/tz4PB","scored":"2026-08-21"},{"lat":44.3316147,"lng":-64.3074195,"addr":"143 South Cove Drive, Feltzen South, Nova Scotia","price":"$879,000","score":68,"verdict":"worth-viewing","province":"NS","url":"https://www.viewpoint.ca/EICDO","scored":"2026-08-20"},{"lat":44.6359528,"lng":-64.5971349,"addr":"590 Gilberts Lane, Maplewood, Nova Scotia B0R 1A0","price":"$550,000","score":68,"verdict":"worth-viewing","province":"NS","url":"https://www.viewpoint.ca/edJSx","scored":"2026-08-21"},{"lat":44.5150587,"lng":-64.3143675,"addr":"6689 Highway 3, Western Shore, Nova Scotia","price":"$518,000","score":64,"verdict":"worth-viewing","province":"NS","url":"https://www.viewpoint.ca/nMQMn","scored":"2026-08-21"},{"lat":44.2863756,"lng":-64.2886695,"addr":"406 Kingsburg Road, Lower Rose Bay, Nova Scotia","price":"$524,900","score":62,"verdict":"worth-viewing","province":"NS","url":"https://www.viewpoint.ca/9ZDB0","scored":"2026-08-18"},{"lat":44.9637457,"lng":-63.756627,"addr":"110 Long Lake Road, East Uniacke, Nova Scotia","price":"$474,900","score":62,"verdict":"worth-viewing","province":"NS","url":"https://www.viewpoint.ca/NVHkG","scored":"2026-08-20"},{"lat":44.661978,"lng":-63.3763705,"addr":"158 West Lawrencetown Road, Lawrencetown, Nova Scotia","price":"$699,000","score":62,"verdict":"worth-viewing","province":"NS","url":"https://www.realtor.ca/real-estate/30178273/158-west-lawrencetown-road-lawrencetown","scored":"2026-08-21"},{"lat":44.8373228,"lng":-62.6191743,"addr":"19194 Highway 7, Spry Harbour, Nova Scotia","price":"","score":58,"verdict":"worth-viewing","province":"NS","url":"https://www.viewpoint.ca/CK9qi","scored":"2026-08-18"},{"lat":45.0114674,"lng":-64.0708657,"addr":"1158 Avondale Road, Poplar Grove, Nova Scotia","price":"","score":0,"verdict":"worth-viewing","province":"NS","url":"https://www.viewpoint.ca/MQN88","scored":"2026-08-21"}];
   // ── Combined filter engine — verdict, province and date-scored filters
